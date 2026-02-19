@@ -1,4 +1,4 @@
-package es.upm.piat.crowdsense;
+package es.upm.piat.crowdsense.model;
 
 import java.time.LocalDateTime;
 import java.util.UUID;

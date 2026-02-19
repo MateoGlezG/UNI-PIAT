@@ -1,4 +1,4 @@
-package es.upm.piat.crowdsense;
+package es.upm.piat.crowdsense.ingestion;
 
 import es.upm.piat.crowdsense.model.LocationID;
 import es.upm.piat.crowdsense.model.WifiProbe;
@@ -61,7 +61,7 @@ public class LogIngestor {
      */
     private WifiProbe mapToObj(Matcher m) {
         // TODO 8: Extraer los datos usando m.group(X)
-        // Recordad el orden de los paréntesis en CrowdRegexManager
+        // Recordad el orden de los paréntesis en CrowdRegexManager, implemenatr extraer la información para lor grupos
         
         // Pista: LocalDateTime.parse(m.group(1), DateTimeFormatter.ISO_DATE_TIME);
     	LocalDateTime ts = null; 

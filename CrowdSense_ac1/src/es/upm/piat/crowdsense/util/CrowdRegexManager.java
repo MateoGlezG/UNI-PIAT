@@ -1,4 +1,4 @@
-package es.upm.piat.crowdsense;
+package es.upm.piat.crowdsense.util;
 
 import java.util.regex.Pattern;
 
@@ -7,13 +7,13 @@ public class CrowdRegexManager {
 	// --- NIVEL 1: ÁTOMOS (Piezas básicas) ---
 
     // TODO 1: Definir el inicio de línea para filtrar ruido (Debe empezar por [DATA])
-    // Pista: Usar ancla de inicio y escapar corchetes.
-    private static final String HEADER_TAG  = ""; 
+    // Pista: Usar ancla de inicio y escapar (escapar es poner un simbolo tal cual que tiene otro significado) corchetes, en java para escapar se usan dos barras \\
+    private static final String HEADER_TAG  = "\\[DATA\\]"; 
 
     private static final String SEP         = "\\s+\\|\\s+";     // Separador " | " (Ya hecho)
     
     // TODO 2: Definir el punto literal (escapado)
-    private static final String DOT         = "";             
+    private static final String DOT         = "\\";              
     
     private static final String SRC_TAG     = "SRC:";
 

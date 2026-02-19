@@ -1,4 +1,4 @@
-package es.upm.piat.crowdsense;
+package es.upm.piat.crowdsense.model;
 
 /**
  * Representa la ubicación desglosada de una sonda.
