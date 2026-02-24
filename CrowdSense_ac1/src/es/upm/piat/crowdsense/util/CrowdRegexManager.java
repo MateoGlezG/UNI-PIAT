@@ -35,7 +35,7 @@ public class CrowdRegexManager {
     private static final String RSSI_SKIP		= "RSSI:-\\d{2}"; // Pista: RSSI:...
     private static final String MAC_ADDR    	= "MAC(:[a-zA-Z0-9]{2}){6}"; // G7: MAC: ...
     // TODO 6: SSID (Puede estar vacío o tener espacios) -> GRUPO 8
-    private static final String SSID        	= "SSDI:.*";
+    private static final String SSID        	= "SSID:.*";
 
 
     // --- NIVEL 2: MOLÉCULAS (Combinación de átomos) ---
@@ -53,6 +53,20 @@ public class CrowdRegexManager {
         StringBuilder sb = new StringBuilder();
         
         // TODO 7: String Regex completo usando append de StringBuilder();
+        sb.append("^");
+        sb.append(HEADER_TAG);
+        sb.append("\\s");
+        sb.append(TIMESTAMP);
+        sb.append(SEP);
+        sb.append(LOCATION_FULL);
+        sb.append(SEP);
+        sb.append(RSSI_SKIP);
+        sb.append(SEP).append("FC:0x\\d+").append(SEP).append("SEQ:\\d+");
+        sb.append(SEP);
+        sb.append(MAC_ADDR);
+        sb.append(SEP);
+        sb.append(SSID);
+        sb.append("$");
 
         return Pattern.compile(sb.toString());
     }
