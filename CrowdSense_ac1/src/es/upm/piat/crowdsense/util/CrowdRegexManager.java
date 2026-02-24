@@ -13,7 +13,7 @@ public class CrowdRegexManager {
     private static final String SEP         = "\\s+\\|\\s+";     // Separador " | " (Ya hecho)
     
     // TODO 2: Definir el punto literal (escapado)
-    private static final String DOT         = "\\";              
+    private static final String DOT         = "\\.";              
     
     private static final String SRC_TAG     = "SRC:";
 
@@ -32,10 +32,10 @@ public class CrowdRegexManager {
     
     // --- DATOS TÉCNICOS ---
     // TODO 5: RSSI (Número negativo) y saltar campos FC/SEQ -> GRUPO 6
-    private static final String RSSI_SKIP		= ""; // Pista: RSSI:...
-    private static final String MAC_ADDR    	= ""; // G7: MAC: ...
+    private static final String RSSI_SKIP		= "RSSI:-\\d{2}"; // Pista: RSSI:...
+    private static final String MAC_ADDR    	= "MAC(:[a-zA-Z0-9]{2}){6}"; // G7: MAC: ...
     // TODO 6: SSID (Puede estar vacío o tener espacios) -> GRUPO 8
-    private static final String SSID        	= "";
+    private static final String SSID        	= "SSDI:.*";
 
 
     // --- NIVEL 2: MOLÉCULAS (Combinación de átomos) ---
@@ -44,7 +44,7 @@ public class CrowdRegexManager {
      * Construimos la Ubicación sumando sus partes y los puntos separadores.
      * Resultado: SRC:(UPM...)\.(B...)\.(P...)\.([A-Z]...)
      */
-    private static final String LOCATION_FULL = ""; //Se trata de concatenar los REGEX de location
+    private static final String LOCATION_FULL = "SRC:(UPM-N-\\d{2})\\.(||w\\d)\\.(\\w\\d)\\.(\\w\\d{2})"; //Se trata de concatenar los REGEX de location
 
 
 
