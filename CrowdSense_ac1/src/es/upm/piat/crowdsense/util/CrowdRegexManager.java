@@ -19,15 +19,15 @@ public class CrowdRegexManager {
 
     // TODO 3: Timestamp ISO-8601 (Ej: 2024-02-08T12:00:00Z) -> GRUPO 1
     // Pista: \d{4}-...
-    private static final String TIMESTAMP   = "";
+    private static final String TIMESTAMP   = "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z";
 
 
     // --- DESGLOSE DE UBICACIÓN (Ej: UPM-N-10.B1.P0.L01) ---
     // TODO 4: Definir los grupos de captura para cada parte
-    private static final String REGEX_BUILDING = ""; // G2: Ej. UPM-N-10
-    private static final String REGEX_BLOCK    = ""; // G3: Ej. B1
-    private static final String REGEX_FLOOR    = ""; // G4: Ej. P0
-    private static final String REGEX_ROOM     = ""; // G5: Ej. L01, A05, H01...
+    private static final String REGEX_BUILDING = "UPM-N-\\d{2}"; // G2: Ej. UPM-N-10
+    private static final String REGEX_BLOCK    = "\\w\\d"; // G3: Ej. B1
+    private static final String REGEX_FLOOR    = "\\w\\d"; // G4: Ej. P0
+    private static final String REGEX_ROOM     = "\\w\\d{2}"; // G5: Ej. L01, A05, H01...
 
     
     // --- DATOS TÉCNICOS ---
