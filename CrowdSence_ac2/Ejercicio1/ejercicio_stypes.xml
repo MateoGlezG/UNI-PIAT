@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:cs="http://upm.es/piat/crowdsense"
+           targetNamespace="http://upm.es/piat/crowdsense"
+           elementFormDefault="qualified">
+            
 <!-- TODO: Completar la cabecera del XML correctamente  -->
 <!-- Relacionar este XML con el Modelo de datos         -->
 <!-- ejercicio_stypes.xsd -->

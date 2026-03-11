@@ -16,6 +16,9 @@
     -->
     <xs:simpleType name="MacAddressType">
         <!-- TU CÓDIGO AQUÍ -->
+        <xs:restriction base="xs:string">
+            <xs:pattern value="MAC(:[a-zA-Z0-9]{2}){6}"/>
+        </xs:restriction>
     </xs:simpleType>
 
     <!-- 
