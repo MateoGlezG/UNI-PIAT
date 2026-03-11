@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:cs="http://upm.es/piat/crowdsense"
+           targetNamespace="http://upm.es/piat/crowdsense"
+           elementFormDefault="qualified">
+
+    <!-- ============================================== -->
+    <!-- CROWDSENSE PROJECT - Modelo Principal          -->
+    <!-- Autor: Proyecto CrowdSense UPM                 -->
+    <!-- Versión: 1.0                                   -->
+    <!-- Descripción: Esquema principal que define la   -->
+    <!--   estructura completa de un proyecto de        -->
+    <!--   medición WiFi con múltiples campañas y sondas-->
+    <!-- ============================================== -->
+
+    <xs:include schemaLocation="crowdsense-types.xsd"/>
+    <xs:include schemaLocation="crowdsense-location.xsd"/>
+    <xs:include schemaLocation="crowdsense-probe.xsd"/>
+    <xs:include schemaLocation="crowdsense-sonda.xsd"/>
+
+    <!-- ========== ELEMENTO RAÍZ ========== -->
+    <!-- Completar con lo desarrollado en el ejercicio 4 -->
+    <!-- 
+        Elemento raíz del documento XML de proyecto CrowdSense.
+        Incluye restricciones de integridad referencial:
+        - sondaKey: IDs de sondas únicos
+        - campanaKey: IDs de campañas únicos
+        - probeToSondaRef: Cada probe referencia una sonda existente
+    -->
+
+    <!-- ========== TIPO COMPLEJO: Proyecto Principal ========== -->
+    <!-- Completar con lo desarrollado en el ejercicio 4 -->
+    <!-- 
+        Tipo principal que representa un proyecto completo de medición.
+        Estructura jerárquica: Proyecto > Campañas > Sondas > Probes
+        
+        Elementos: metadata, catalogoUbicaciones?, campanas, estadisticas?
+        Atributos: version, generadoEn
+    -->
+
+    <!-- ========== Metadatos del Proyecto ========== -->
+    <!-- Completar con lo desarrollado en el ejercicio 4 -->
+    <!-- 
+        Información administrativa y descriptiva del proyecto.
+        Elementos: id, nombre, descripcion?, responsable, fechaCreacion,
+                   fechaModificacion?, status, etiquetas?
+    -->
+
+    <!-- ========== Tipo Responsable ========== -->
+    <!-- Completar con lo desarrollado en el ejercicio 4 -->
+    <!-- 
+        Información de contacto del responsable.
+        Elementos: nombre, email, departamento?, telefono?
+    -->
+
+    <!-- ========== Campaña de Medición ========== -->
+    <!-- Completar con lo desarrollado en el ejercicio 4 -->
+    <!-- 
+        Representa una campaña de medición dentro del proyecto.
+        Una campaña agrupa sondas y tiene un periodo de tiempo definido.
+        
+        Elementos: nombre, objetivo?, fechaInicio, fechaFin?, sondas, resumen?
+        Atributos: id (required), activa (default true)
+    -->
+
+    <!-- ========== Resumen de Campaña ========== -->
+    <!-- Completar con lo desarrollado en el ejercicio 4 -->
+    <!-- 
+        Estadísticas agregadas de una campaña.
+        Elementos: totalProbes, dispositivosUnicos, rssiPromedio,
+                   duracionHoras?, probesPorHora?
+    -->
+
+    <!-- ========== Estadísticas Globales ========== -->
+    <!-- Completar con lo desarrollado en el ejercicio 4 -->
+    <!-- 
+        Estadísticas consolidadas de todo el proyecto.
+        Elementos: totalCampanas, totalSondas, totalProbes, 
+                   dispositivosUnicosGlobal, ultimaActualizacion,
+                   topDispositivos?, distribucionPorUbicacion?
+    -->
+
+</xs:schema>

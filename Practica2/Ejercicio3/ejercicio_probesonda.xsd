@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:cs="http://upm.es/piat/crowdsense"
+           targetNamespace="http://upm.es/piat/crowdsense"
+           elementFormDefault="qualified">
+
+    <!-- ============================================== -->
+    <!-- EJERCICIO 3: Eficiencia y Asociación          -->
+    <!-- Desacoplamiento Hardware (Sonda) / Dato (Probe) -->
+    <!-- ============================================== -->
+
+    <!-- Importamos los esquemas previos -->
+    <xs:include schemaLocation="crowdsense-types.xsd"/>
+    <xs:include schemaLocation="crowdsense-location.xsd"/>
+
+    <!-- ========== TIPO COMPLEJO: WifiProbeType ========== -->
+    <!-- 
+        WifiProbeType representa una trama WiFi capturada.
+        
+        CONCEPTO CLAVE: El probe NO contiene los datos de la sonda,
+        solo mantiene una REFERENCIA LIGERA (sondaRef) hacia ella.
+        Esto evita duplicar información y mejora la eficiencia.
+        
+        Elementos (secuencia):
+          OBLIGATORIOS:
+          * timestamp (xs:dateTime) - Momento de captura
+          * location (cs:LocationIDType) - Ubicación de captura
+          * rssi (cs:RssiType) - Intensidad de señal
+          * macAddress (cs:MacAddressType) - MAC del dispositivo detectado
+          * ssid (cs:SsidType) - Nombre de red
+          
+          OPCIONALES (minOccurs="0"):
+          * canal (cs:CanalWifiType) - Canal WiFi
+          * frecuencia (cs:FrecuenciaWifiType) - Banda de frecuencia
+          * tipoTrama - Tipo anónimo con enumeración: 
+                        PROBE_REQUEST, PROBE_RESPONSE, BEACON, DATA, OTHER
+          * fabricante (xs:string) - Fabricante del dispositivo
+        
+        Atributos:
+          * id (cs:UuidType) - OBLIGATORIO
+          * sondaRef (cs:UuidType) - OBLIGATORIO (referencia a la sonda)
+          * secuencia (xs:positiveInteger) - OPCIONAL
+    -->
+    <xs:complexType name="WifiProbeType">
+        <!-- TU CÓDIGO AQUÍ -->
+        
+    </xs:complexType>
+
+    <!-- ========== TIPO COMPLEJO: WifiProbesBatchType ========== -->
+    <!-- 
+        Contenedor para transmisión eficiente de múltiples probes.
+        
+        Elementos:
+          * probe (cs:WifiProbeType) - minOccurs="1" maxOccurs="unbounded"
+        
+        Atributos (todos OBLIGATORIOS excepto sondaOrigen):
+          * batchId (cs:UuidType) - required
+          * batchTimestamp (xs:dateTime) - required
+          * totalProbes (xs:positiveInteger) - required
+          * sondaOrigen (cs:UuidType) - optional
+    -->
+    <xs:complexType name="WifiProbesBatchType">
+        <!-- TU CÓDIGO AQUÍ -->
+        
+    </xs:complexType>
+
+    <!-- ========== TIPO COMPLEJO: SondaConfigType ========== -->
+    <!-- 
+        Configuración operativa de una sonda de captura WiFi.
+        
+        Elementos (secuencia):
+          * intervaloCaptura (cs:IntervaloCapturaType) - default="1000"
+          * rssiMinimo (cs:RssiType) - default="-90"
+          * canalesMonitorizados - Tipo complejo anónimo con:
+              - Secuencia de elementos "canal" (cs:CanalWifiType)
+              - minOccurs="1" maxOccurs="unbounded"
+          * filtroSSID (minOccurs="0") - Tipo complejo anónimo con:
+              - ssidIncluir (cs:SsidType) minOccurs="0" maxOccurs="unbounded"
+              - ssidExcluir (cs:SsidType) minOccurs="0" maxOccurs="unbounded"
+              - Atributo "modo" con enumeración INCLUIR/EXCLUIR, default="INCLUIR"
+          * modoCaptura (cs:ModoCapturaType) - minOccurs="0" default="CONTINUO"
+          * tamanoLote (xs:positiveInteger) - minOccurs="0" default="100"
+    -->
+    <xs:complexType name="SondaConfigType">
+        <!-- TU CÓDIGO AQUÍ -->
+        
+    </xs:complexType>
+
+    <!-- ========== ESTRUCTURA DEL DOCUMENTO DE PRUEBA ========== -->
+    <!-- Esta parte ya está completada para validar tu trabajo -->
+    
+    <xs:element name="pruebaProbesSondas">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="probe" type="cs:WifiProbeType" 
+                            minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="lote" type="cs:WifiProbesBatchType" 
+                            minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="configuracion" type="cs:SondaConfigType" 
+                            minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:cs="http://upm.es/piat/crowdsense"
+           targetNamespace="http://upm.es/piat/crowdsense"
+           elementFormDefault="qualified">
+
+    <!-- ============================================== -->
+    <!-- CROWDSENSE TYPES - Tipos básicos reutilizables -->
+    <!-- Autor: Proyecto CrowdSense UPM                 -->
+    <!-- Versión: 1.0                                   -->
+    <!-- ============================================== -->
+
+    <!-- ========== TIPOS SIMPLES (Restricciones) ========== -->
+    
+    <!-- Dirección MAC: formato XX:XX:XX:XX:XX:XX -->
+    <!-- Completar con lo desarrollado en el ejercicio 1 -->
+
+    <!-- RSSI: señal WiFi entre -100 y 0 dBm -->
+    <!-- Completar con lo desarrollado en el ejercicio 1 -->
+    
+    <!-- SSID: nombre de red, máximo 32 caracteres -->
+    <!-- Completar con lo desarrollado en el ejercicio 1 -->
+   
+    <!-- Código de edificio UPM: UPM-N-XX o UPM-S-XX -->
+    <xs:simpleType name="EdificioType">
+        <xs:annotation>
+            <xs:documentation>
+                Identificador de edificio en el campus UPM.
+                Formato: UPM-[N|S]-número
+                N = Campus Norte, S = Campus Sur
+                Ejemplo: UPM-N-10, UPM-S-5
+            </xs:documentation>
+        </xs:annotation>
+        <!-- TODO -->
+    </xs:simpleType>
+
+    <!-- Bloque: B seguido de número -->
+    <xs:simpleType name="BloqueType">
+        <xs:annotation>
+            <xs:documentation>
+                Identificador de bloque dentro de un edificio.
+                Formato: B + número (1-99)
+                Ejemplo: B1, B2, B10
+            </xs:documentation>
+        </xs:annotation>
+        <!-- TODO -->
+    </xs:simpleType>
+
+    <!-- Planta: P seguido de número (0=bajo, -1=sótano) -->
+    <xs:simpleType name="PlantaType">
+        <xs:annotation>
+            <xs:documentation>
+                Identificador de planta dentro de un bloque.
+                Formato: P + número (puede ser negativo para sótanos)
+                Ejemplo: P0 (planta baja), P1, P-1 (sótano)
+            </xs:documentation>
+        </xs:annotation>
+        <!-- TODO -->
+    </xs:simpleType>
+
+    <!-- Sala: Letra + número (L=Lab, A=Aula, H=Hall, C=Común, O=Oficina, D=Despacho, E=Escalera, S=Servicio) -->
+    <xs:simpleType name="SalaType">
+        <xs:annotation>
+            <xs:documentation>
+                Identificador de sala dentro de una planta.
+                Formato: Letra de tipo + número
+                Tipos: L=Laboratorio, A=Aula, H=Hall, C=Común, 
+                       O=Oficina, D=Despacho, E=Escalera, S=Servicio
+                Ejemplo: L01, A15, H01
+            </xs:documentation>
+        </xs:annotation>
+        <!-- TODO -->
+    </xs:simpleType>
+
+    <!-- UUID para identificadores únicos -->
+    <xs:simpleType name="UuidType">
+        <xs:annotation>
+            <xs:documentation>
+                Identificador único universal (UUID v4).
+                Formato: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+                Ejemplo: 550e8400-e29b-41d4-a716-446655440000
+            </xs:documentation>
+        </xs:annotation>
+        <!-- TODO -->
+    </xs:simpleType>
+
+    <!-- Estado de la sonda -->
+    <!-- Completar con lo desarrollado en el ejercicio 1 -->
+
+    <!-- Estado del proyecto -->
+    <xs:simpleType name="ProjectStatusType">
+        <xs:annotation>
+            <xs:documentation>
+                Estado del ciclo de vida de un proyecto.
+                PLANNED: Planificado, pendiente de inicio
+                IN_PROGRESS: En ejecución activa
+                COMPLETED: Finalizado correctamente
+                CANCELLED: Cancelado antes de completarse
+            </xs:documentation>
+        </xs:annotation>
+        <!-- TODO -->
+    </xs:simpleType>
+
+    <!-- Tipo de espacio físico -->
+
+    <!-- Banda de frecuencia WiFi -->
+
+    <!-- Canal WiFi (1-165) -->
+
+    <!-- Email válido -->
+
+    <!-- Latitud geográfica (-90 a 90 grados) -->
+    <xs:simpleType name="LatitudType">
+        <xs:annotation>
+            <xs:documentation>
+                Latitud geográfica en grados decimales.
+                Rango válido: -90 (Polo Sur) a 90 (Polo Norte).
+                Ejemplo: 40.416775 (Madrid)
+            </xs:documentation>
+        </xs:annotation>
+        <!-- TODO -->
+    </xs:simpleType>
+
+    <!-- Longitud geográfica (-180 a 180 grados) -->
+    <xs:simpleType name="LongitudType">
+        <xs:annotation>
+            <xs:documentation>
+                Longitud geográfica en grados decimales.
+                Rango válido: -180 (Oeste) a 180 (Este).
+                Ejemplo: -3.703790 (Madrid)
+            </xs:documentation>
+        </xs:annotation>
+        <!-- TODO -->
+    </xs:simpleType>
+
+    <!-- Superficie en metros cuadrados (debe ser positiva) -->
+    <xs:simpleType name="SuperficieType">
+        <xs:annotation>
+            <xs:documentation>
+                Superficie de un espacio en metros cuadrados.
+                Debe ser un valor positivo mayor que cero.
+            </xs:documentation>
+        </xs:annotation>
+        <!-- TODO -->
+    </xs:simpleType>
+
+    <!-- Modo de captura de la sonda -->
+    <xs:simpleType name="ModoCapturaType">
+        <xs:annotation>
+            <xs:documentation>
+                Modo de operación de captura de la sonda.
+                CONTINUO: Captura permanente mientras esté activa.
+                PROGRAMADO: Captura en horarios predefinidos.
+                BAJO_DEMANDA: Captura solo cuando se solicita.
+            </xs:documentation>
+        </xs:annotation>
+        <!-- TODO -->
+    </xs:simpleType>
+
+    <!-- Intervalo de captura en milisegundos (con límites razonables) -->
+    <xs:simpleType name="IntervaloCapturaType">
+        <xs:annotation>
+            <xs:documentation>
+                Intervalo de captura en milisegundos.
+                Mínimo: 10ms (evita saturación del sistema).
+                Máximo: 60000ms (1 minuto, evita pérdida excesiva de datos).
+            </xs:documentation>
+        </xs:annotation>
+        <!-- TODO -->
+    </xs:simpleType>
+
+</xs:schema>
