@@ -1,0 +1,62 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://upm.es/crowdsense"
+           xmlns:tns="http://upm.es/crowdsense"
+           elementFormDefault="qualified">
+
+    <xs:simpleType name="MacType"> <xs:restriction base="xs:string">
+            <xs:pattern value="([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="RssiType"> <xs:restriction base="xs:int">
+            <xs:minInclusive value="-100"/>
+            <xs:maxInclusive value="0"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:group name="GeoGroup">
+        <xs:sequence>
+            <xs:element name="Lat" type="xs:float"/>
+            <xs:element name="Lon" type="xs:float"/>
+        </xs:sequence>
+    </xs:group>
+
+    <xs:attributeGroup name="CabeceraSonda">
+        <xs:attribute name="idSonda" type="xs:string" use="required"/>
+        <xs:attribute name="timestamp" type="xs:dateTime" use="required"/>
+    </xs:attributeGroup>
+
+    <xs:complexType name="EventoBaseType"> <xs:attribute name="nivelBateria" type="xs:int"/>
+    </xs:complexType>
+
+    <xs:complexType name="EventoWifiType"> <xs:complexContent>
+            <xs:extension base="tns:EventoBaseType">
+                <xs:sequence>
+                    <xs:element name="Ssid" type="xs:string"/>
+                    <xs:element name="Mac" type="tns:MacType"/>
+                    <xs:element name="Rssi" type="tns:RssiType"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="InformeSonda">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Ubicacion">
+                    <xs:complexType> <xs:group ref="tns:GeoGroup"/> </xs:complexType>
+                </xs:element>
+                <xs:element name="ListaEventos">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="EventoWifi" type="tns:EventoWifiType"
+                                        maxOccurs="unbounded"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attributeGroup ref="tns:CabeceraSonda"/>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>

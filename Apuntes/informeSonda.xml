@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cs:InformeSonda
+    xmlns:cs="http://upm.es/crowdsense"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://upm.es/crowdsense esquema_infSonda.xsd"
+    idSonda="SP-2024-05"
+    timestamp="2024-01-20T14:30:00">
+
+    <cs:Ubicacion>
+        <cs:Lat>40.45</cs:Lat>
+        <cs:Lon>-3.72</cs:Lon>
+    </cs:Ubicacion>
+
+    <cs:ListaEventos>
+        <cs:EventoWifi nivelBateria="85">
+            <cs:Ssid>Eduroam</cs:Ssid>
+            <cs:Mac>AA:BB:CC:11:22:33</cs:Mac> 
+            <cs:Rssi>-65</cs:Rssi>             
+        </cs:EventoWifi>
+        
+        <cs:EventoWifi nivelBateria="84">
+            <cs:Ssid>UPM-Guest</cs:Ssid>
+            <cs:Mac>11:22:33:AA:BB:CC</cs:Mac>
+            <cs:Rssi>-40</cs:Rssi>
+        </cs:EventoWifi>
+    </cs:ListaEventos>
+
+</cs:InformeSonda>

@@ -64,11 +64,11 @@ public class LogIngestor {
         // Recordad el orden de los paréntesis en CrowdRegexManager, implemenatr extraer la información para lor grupos
         
         // Pista: LocalDateTime.parse(m.group(1), DateTimeFormatter.ISO_DATE_TIME);
-    	LocalDateTime ts = null; 
-        LocationID loc = null; 
-        int rssi = 0;
-        String mac = "";
-        String ssid = "";
+    	LocalDateTime ts = LocalDateTime.parse(m.group(1), DateTimeFormatter.ISO_DATE_TIME); 
+        LocationID loc = new LocationID (m.group(2), m.group(3), m.group(4), m.group(5)); 
+        int rssi = Integer.parseInt(m.group(6));
+        String mac = m.group(7);
+        String ssid = m.group(8);
 
         return new WifiProbe(ts, loc, rssi, mac, ssid);
     }
