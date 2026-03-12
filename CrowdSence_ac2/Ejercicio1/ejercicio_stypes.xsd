@@ -17,7 +17,7 @@
     <xs:simpleType name="MacAddressType">
         <!-- TU CÓDIGO AQUÍ -->
         <xs:restriction base="xs:string">
-            <xs:pattern value="MAC(:[a-zA-Z0-9]{2}){6}"/>
+            <xs:pattern value="([a-zA-Z0-9]{2}:){5}[a-zA-Z0-9]{2}"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -30,6 +30,10 @@
     -->
     <xs:simpleType name="RssiType">
         <!-- TU CÓDIGO AQUÍ -->
+        <xs:restriction base="xs:int">
+            <xs:minInclusive value="-100"/>
+            <xs:maxInclusive value="0"/>
+        </xs:restriction>
     </xs:simpleType>
 
     <!-- 
@@ -41,6 +45,9 @@
     -->
     <xs:simpleType name="SsidType">
         <!-- TU CÓDIGO AQUÍ -->
+        <xs:restriction base="xs:string">
+            <xs:maxLength value="32"/>
+        </xs:restriction>
     </xs:simpleType>
 
     <!-- 
@@ -51,6 +58,12 @@
     -->
     <xs:simpleType name="SondaStatusType">
         <!-- TU CÓDIGO AQUÍ -->
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="ACTIVE"/><!--enumeration es una lista y se elije 1-->
+            <xs:enumeration value="INACTIVE"/>
+            <xs:enumeration value="MAINTENANCE"/>
+            <xs:enumeration value="ERROR">
+        </xs:restriction>
     </xs:simpleType>
 
     <!-- ============================================ -->
