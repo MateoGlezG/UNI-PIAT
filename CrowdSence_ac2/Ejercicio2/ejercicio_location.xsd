@@ -10,9 +10,9 @@
     <!-- ============================================== -->
 
     <!-- Importamos los tipos básicos del ejercicio 1 -->
-    <!-- TODO                                         -->
+    <!-- TODO (cuando es otro fichero de local es include, cuando remoto es import)  -->
     <!-- ============================================ -->
-
+    <xs:include schemaLocation="/Ejercicio1/ejercicio_stypes.xsd"/>
     <!-- ========== TIPO COMPLEJO: LocationIDType (Básico) ========== -->
     <!-- 
         LocationIDType representa una ubicación básica con estructura jerárquica:
@@ -30,7 +30,15 @@
     -->
     <xs:complexType name="LocationIDType">
         <!-- TU CÓDIGO AQUÍ -->
-        
+        <xs:sequence>
+            <xs:element name="edificio" type="cs:EdificioType" minOccurs="1"/> <!--minOccurs es para ponerlo obligatorio, por defecto en elementos esta en 1, si se quire poner opcional es 0-->
+            <xs:element name="bloque" type="cs:BloqueType"/>
+            <xs:element name="planta" type="PlantaType"/>
+            <xs:element name="sala" type="cs:SalaType"/>
+
+            <xs:atribute name="lat" type="cs:LatitudType" use="optional"/> <!--en los atributos para que sean obligatorios es con use, optional para q no lo sea y required para que lo sea-->
+            <xs:atrubute name="lon" type="cs:LongitudType" use="optional"/>
+        </xs:sequence>
     </xs:complexType>
 
     <!-- ========== TIPO COMPLEJO: LocationFullType (Extendido) ========== -->
