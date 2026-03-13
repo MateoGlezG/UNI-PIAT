@@ -69,7 +69,24 @@
     -->
     <xs:complexType name="LocationFullType">
         <!-- TU CÓDIGO AQUÍ -->
-        
+        <xs:complexContent> <!--sse usa cuando un tipo de datos complehos va a heredar de otro -->
+            <xs:extension base="LocationIdType"> <!--le digo de que tipo de datos heredo-->
+                <xs:sequence>
+                    <xs:element name="descripcion" type="xs:tring"/>
+                    <xs:element name="capacidad" type="xs:positiveInteger"/>
+                    <xs:element name="tipoEspacio" type="cs:TipoEspacioType"/>
+                    <xs:element name="superficie" type="cs:SuperficieType"/>
+
+                    <xs:element name="equipamiento" type="xs:complexType" minOccurs="0"/>
+                        <xs:sequence>
+                            <element name="item" type="xs:string" minOccurs="0"/>
+                        </xs:sequence>
+                    </xs:element><!--fin equipamiento-->
+
+                    <xs:atrubute name="activo" type="xs:boolean" use="optional" default="true"/> <!--default sirve para poner el valor por defecto-->
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
 
     <!-- ========== ELEMENTOS REUTILIZABLES ========== -->
