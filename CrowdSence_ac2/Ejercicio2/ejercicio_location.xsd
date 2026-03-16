@@ -2,7 +2,8 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
            xmlns:cs="http://upm.es/piat/crowdsense"
            targetNamespace="http://upm.es/piat/crowdsense"
-           elementFormDefault="qualified">
+           elementFormDefault="qualified"
+>
 
     <!-- ============================================== -->
     <!-- EJERCICIO 2: Herencia y Reutilización         -->
@@ -12,7 +13,7 @@
     <!-- Importamos los tipos básicos del ejercicio 1 -->
     <!-- TODO (cuando es otro fichero de local es include, cuando remoto es import)  -->
     <!-- ============================================ -->
-    <xs:include schemaLocation="/Ejercicio1/ejercicio_stypes.xsd"/>
+    <xs:include schemaLocation="../crowdsense-types.xsd"/>
     <!-- ========== TIPO COMPLEJO: LocationIDType (Básico) ========== -->
     <!-- 
         LocationIDType representa una ubicación básica con estructura jerárquica:
@@ -33,12 +34,12 @@
         <xs:sequence>
             <xs:element name="edificio" type="cs:EdificioType" minOccurs="1"/> <!--minOccurs es para ponerlo obligatorio, por defecto en elementos esta en 1, si se quire poner opcional es 0-->
             <xs:element name="bloque" type="cs:BloqueType"/>
-            <xs:element name="planta" type="PlantaType"/>
+            <xs:element name="planta" type="cs:PlantaType"/>
             <xs:element name="sala" type="cs:SalaType"/>
-
-            <xs:atribute name="lat" type="cs:LatitudType" use="optional"/> <!--en los atributos para que sean obligatorios es con use, optional para q no lo sea y required para que lo sea-->
-            <xs:atrubute name="lon" type="cs:LongitudType" use="optional"/>
-        </xs:sequence>
+        </xs:sequence> 
+        
+        <xs:attribute name="lat" type="cs:LatitudType" use="optional"/> <!--en los atributos para que sean obligatorios es con use, optional para q no lo sea y required para que lo sea-->
+        <xs:attribute name="lon" type="cs:LongitudType" use="optional"/>
     </xs:complexType>
 
     <!-- ========== TIPO COMPLEJO: LocationFullType (Extendido) ========== -->
@@ -70,21 +71,24 @@
     <xs:complexType name="LocationFullType">
         <!-- TU CÓDIGO AQUÍ -->
         <xs:complexContent> <!--sse usa cuando un tipo de datos complehos va a heredar de otro -->
-            <xs:extension base="LocationIdType"> <!--le digo de que tipo de datos heredo-->
+            <xs:extension base="cs:LocationIDType"> <!--le digo de que tipo de datos heredo-->
                 <xs:sequence>
-                    <xs:element name="descripcion" type="xs:tring"/>
-                    <xs:element name="capacidad" type="xs:positiveInteger"/>
-                    <xs:element name="tipoEspacio" type="cs:TipoEspacioType"/>
-                    <xs:element name="superficie" type="cs:SuperficieType"/>
+                    <xs:element name="descripcion" type="xs:string" minOccurs="0"/>
+                    <xs:element name="capacidad" type="xs:positiveInteger" minOccurs="0"/>
+                    <xs:element name="tipoEspacio" type="cs:TipoEspacioType" minOccurs="0"/>
+                    <xs:element name="superficie" type="cs:SuperficieType" minOccurs="0"/>
 
-                    <xs:element name="equipamiento" type="xs:complexType" minOccurs="0"/>
-                        <xs:sequence>
-                            <element name="item" type="xs:string" minOccurs="0"/>
-                        </xs:sequence>
-                    </xs:element><!--fin equipamiento-->
-
-                    <xs:atrubute name="activo" type="xs:boolean" use="optional" default="true"/> <!--default sirve para poner el valor por defecto-->
+                     <xs:element name="equipamiento" minOccurs="0">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="item" type="xs:string" maxOccurs="unbounded"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>    
                 </xs:sequence>
+
+                <xs:attribute name="activo" type="xs:boolean" use="optional" default="true"/> <!--default sirve para poner el valor por defecto-->
+
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -97,6 +101,8 @@
     -->
     
     <!-- TU CÓDIGO AQUÍ -->
+     <xs:element name="location" type="cs:LocationIDType"/>
+     <xs:element name="ubicacionCompleta" type="cs:LocationFullType"/>
 
     <!-- ========== ESTRUCTURA DEL DOCUMENTO DE PRUEBA ========== -->
     <!-- Esta parte ya está completada para que puedas validar tu trabajo -->
@@ -106,8 +112,8 @@
             <xs:sequence>
                 <xs:element name="ubicacionBasica" type="cs:LocationIDType" 
                             minOccurs="0" maxOccurs="unbounded"/>
-                <xs:element name="ubicacionCompleta" type="cs:LocationFullType" 
-                            minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="cs:ubicacionCompleta" 
+                            minOccurs="0" maxOccurs="unbounded"/><!--uso el ref pues uso una referecnia al elemento ubicacion completa referido arriba y puedo luego poner las espcificaciones que quiera-->
             </xs:sequence>
         </xs:complexType>
     </xs:element>

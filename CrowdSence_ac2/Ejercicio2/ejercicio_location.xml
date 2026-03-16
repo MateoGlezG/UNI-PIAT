@@ -2,8 +2,12 @@
 <!-- TODO: Completar la cabecera del XML correctamente  -->
 <!-- Relacionar este XML con el Modelo de datos         -->
 <!-- ejercicio_location.xsd                              -->
-<cs:pruebaLocation>
-
+<cs:pruebaLocation
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:cs="http://upm.es/piat/crowdsense"
+    xsi:schemaLocation="http://upm.es/piat/crowdsense ejercicio_location.xsd"
+>
+    
     <!-- ================================================ -->
     <!-- PARTE 1: Pruebas de LocationIDType (tipo base)   -->
     <!-- ================================================ -->

@@ -62,7 +62,7 @@
             <xs:enumeration value="ACTIVE"/><!--enumeration es una lista y se elije 1-->
             <xs:enumeration value="INACTIVE"/>
             <xs:enumeration value="MAINTENANCE"/>
-            <xs:enumeration value="ERROR">
+            <xs:enumeration value="ERROR"/>
         </xs:restriction>
     </xs:simpleType>
 
