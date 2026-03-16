@@ -75,7 +75,7 @@
                 <xs:sequence>
                     <xs:element name="descripcion" type="xs:string" minOccurs="0"/>
                     <xs:element name="capacidad" type="xs:positiveInteger" minOccurs="0"/>
-                    <xs:element name="tipoEspacio" type="cs:TipoEspacioType" minOccurs="0"/>
+                    <!--<xs:element name="tipoEspacio" type="cs:TipoEspacioType" minOccurs="0"/> comentado pendiete de confirmar el tipo -->
                     <xs:element name="superficie" type="cs:SuperficieType" minOccurs="0"/>
 
                      <xs:element name="equipamiento" minOccurs="0">

@@ -23,6 +23,18 @@
         Atributos opcionales: lat, lon (coordenadas GPS)
     -->
 
+    <xs:complexType name="LocationIDType">
+        <xs:sequence>
+            <xs:element name="edificio" type="cs:EdificioType" minOccurs="1"/>
+            <xs:element name="bloque" type="cs:BloqueType"/>
+            <xs:element name="planta" type="cs:PlantaType"/>
+            <xs:element name="sala" type="cs:SalaType"/>
+        </xs:sequence>
+
+        <xs:attribute name="lat" type="cs:LatitudType" use="optional"/>
+        <xs:attribute name="lon" type="cs:LongitudType" use="optional"/>
+    </xs:complexType>
+
     <!-- ========== TIPO COMPLEJO: LocationFullType (Extendido) ========== -->
     <!-- Completar con lo desarrollado en el ejercicio 2 -->
     <!-- 
@@ -32,6 +44,30 @@
         Elementos adicionales: descripcion, capacidad, tipoEspacio, superficie, equipamiento
         Atributo adicional: activo (boolean, default true)
     -->
+
+    <xs:complexType name="LocationFullType">
+        <xs:complexContent>
+            <xs:extension base="cs:LocationIDType"> <!--le digo de que tipo de datos heredo-->
+                <xs:sequence>
+                    <xs:element name="descripcion" type="xs:string" minOccurs="0"/>
+                    <xs:element name="capacidad" type="xs:positiveInteger" minOccurs="0"/>
+                    <!--<xs:element name="tipoEspacio" type="cs:TipoEspacioType" minOccurs="0"/> comentado pendiete de confirmar el tipo -->
+                    <xs:element name="superficie" type="cs:SuperficieType" minOccurs="0"/>
+                   
+                    <xs:element name="equipamiento" minOccurs="0">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element name="item" type="xs:string" maxOccurs="unbounded"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                        
+                </xs:sequence>
+
+                <xs:attribute name="activo" type="xs:boolean" use="optional" default="true"/> <!--default sirve para poner el valor por defecto-->
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
 
     <!-- ========== Elemento reutilizable: location ========== -->
     <xs:element name="location" type="cs:LocationIDType">
