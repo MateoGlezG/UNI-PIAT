@@ -14,7 +14,7 @@
     
     <!-- Dirección MAC: formato XX:XX:XX:XX:XX:XX -->
     <!-- Completar con lo desarrollado en el ejercicio 1 -->
-    <xs:simpleType name="MacAdressType">
+    <xs:simpleType name="MacAddressType">
         <xs:restriction base="xs:string">
             <xs:pattern value="([a-zA-Z0-9]{2}:){5}[a-zA-Z0-9]{2}"/>
         </xs:restriction>
@@ -242,6 +242,17 @@
             <xs:minInclusive value="10"/>
             <xs:maxInclusive value="60000"/>
          </xs:restriction>
+    </xs:simpleType>
+
+    <!--Tipo extra que piden en el ejercicio 2-->
+    <xs:simpleType name="TipoEspacioType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="AULA"/>
+            <xs:enumeration value="AULA_MAGNA"/>
+            <xs:enumeration value="LABORATORIO"/>
+            <xs:enumeration value="SALA_REUNIONES"/>
+            <xs:enumeration value="OTRO"/>
+        </xs:restriction>
     </xs:simpleType>
 
 </xs:schema>

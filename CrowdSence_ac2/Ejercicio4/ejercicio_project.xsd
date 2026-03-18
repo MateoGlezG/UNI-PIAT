@@ -10,10 +10,10 @@
     <!-- ============================================== -->
 
     <!-- Importamos todos los esquemas previos -->
-    <xs:include schemaLocation="crowdsense-types.xsd"/>
-    <xs:include schemaLocation="crowdsense-location.xsd"/>
-    <xs:include schemaLocation="crowdsense-probe.xsd"/>
-    <xs:include schemaLocation="crowdsense-sonda.xsd"/>
+    <xs:include schemaLocation="../crowdsense-types.xsd"/>
+    <xs:include schemaLocation="../crowdsense-location.xsd"/>
+    <xs:include schemaLocation="../crowdsense-probe.xsd"/>
+    <xs:include schemaLocation="../crowdsense-sonda.xsd"/>
 
     <!-- ========== ELEMENTO RAÍZ CON INTEGRIDAD REFERENCIAL ========== -->
     <!-- 

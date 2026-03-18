@@ -26,6 +26,34 @@
                    canal?, frecuencia?, tipoTrama?, fabricante?
         Atributos: id (required), sondaRef (required), secuencia (optional)
     -->
+        <xs:complexType name="WifiProbeType">
+        <!-- TU CÓDIGO AQUÍ -->
+        <xs:sequence>
+            <xs:element name="timestamp" type="xs:dateTime" minOccurs="1"/>
+            <xs:element name="location" type="cs:LocationIDType" minOccurs="1"/>
+            <xs:element name="rssi" type="cs:RssiType" /><!--se puede no poner minOccurs puesto que el valor por defecto es 1-->
+            <xs:element name="macAddress" type="cs:MacAddressType" />
+            <xs:element name="ssid" type="cs:SsidType" />
+
+            <xs:element name="canal" type="cs:WifiChanel" minOccurs="0"/>
+            <xs:element name="frecuencia" type="cs:BandaFrecuenciaWifi" minOccurs="0"/>
+            <xs:element name="tipoTrama" minOccurs="0">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="PROBE_REQUEST"/>
+                        <xs:enumeration value="PROBE_RESPONSE"/>
+                        <xs:enumeration value="BEACON"/>
+                        <xs:enumeration value="DATA"/>
+                        <xs:enumeration value="OTHER"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="fabricante" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="cs:UuidType" use="required"/>
+        <xs:attribute name="sondaRef" type="cs:UuidType" use="required"/>
+        <xs:attribute name="secuencia" type="xs:positiveInteger" use="optional"/>
+    </xs:complexType>
 
     <!-- ========== TIPO COMPLEJO: WifiProbesBatchType ========== -->
     <!-- Completar con lo desarrollado en el ejercicio 3 -->
@@ -37,6 +65,17 @@
         Atributos: batchId, batchTimestamp, totalProbes (required)
                    sondaOrigen (optional)
     -->
+        <xs:complexType name="WifiProbesBatchType">
+        <!-- TU CÓDIGO AQUÍ -->
+         <xs:sequence>
+            <xs:element name="probe" type="cs:WifiProbeType" maxOccurs="unbounded"/>
+         </xs:sequence>
+        
+         <xs:attribute name="batchId" type="cs:UuidType" use="required"/>
+         <xs:attribute name="batchTimestamp" type="xs:dateTime" use="required"/>
+         <xs:attribute name="totalProbes" type="xs:positiveInteger" use="required"/>
+         <xs:attribute name="sondaOrigen" type="cs:UuidType" use="optional"/>
+    </xs:complexType>
 
     <!-- ========== Elemento raíz para lotes independientes ========== -->
     <xs:element name="wifiProbesBatch" type="cs:WifiProbesBatchType">
