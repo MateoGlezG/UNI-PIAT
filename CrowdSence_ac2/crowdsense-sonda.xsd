@@ -23,6 +23,40 @@
         Elementos: intervaloCaptura, rssiMinimo, canalesMonitorizados,
                    filtroSSID?, modoCaptura?, tamanoLote?
     -->
+        <xs:complexType name="SondaConfigType">
+        <!-- TU CÓDIGO AQUÍ -->
+        <xs:sequence>
+            <xs:element name="intervaloCaptura" type="cs:IntervaloCapturaType" default="1000"/>
+            <xs:element name="rssiMinimo" type="cs:RssiType" default="-90"/>
+            <xs:element name="canalesMonitorizados">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="canal" type="cs:WifiChanel" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="filtroSSID" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="ssidIncluir" type="cs:SsidType" minOccurs="0" maxOccurs="unbounded"/>
+                        <xs:element name="ssidExcluir" type="cs:SsidType" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+
+                    <xs:attribute name="modo" default="INCLUIR">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:enumeration value="INCLUIR"/>
+                                <xs:enumeration value="EXCLUIR"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:attribute>
+                </xs:complexType>
+            </xs:element> <!--fin de elemento filtroSSID-->
+            <xs:element name="modoCaptura" type="cs:ModoCapturaType" default="CONTINUO" minOccurs="0"/>
+            <xs:element name="tamanoLote" type="xs:positiveInteger" default="100" minOccurs="0"></xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
 
     <!-- ========== TIPO COMPLEJO: SondaType ========== -->
     <!-- Completar con lo desarrollado en el ejercicio 4 -->

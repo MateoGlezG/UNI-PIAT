@@ -61,6 +61,25 @@
     -->
     <xs:complexType name="CrowdSenseProjectType">
         <!-- TU CÓDIGO AQUÍ -->
+         <xs:sequence>
+            <xs:element name="metadata" type="cs:ProjectMetadataType" minOccurs="1"/>
+            <xs:element name="catalogoUbicaciones" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="ubicacion" type="cs:LocationFullType" minOccurs="0" maxOccurs="unbounded"/>                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="campanas" minOccurs="1" maxOccurs="1">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="campana" type="cs:CampanaType" minOccurs="0" maxOccurs="unbounded"/>                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="estadisticas" type="cs:EstadisticasGlobalesType" minOccurs="0"/>
+         </xs:sequence>
+         
+         <xs:attribute name="version" type="xs:string" default="1.0"/>
+         <xs:attribute name="generadoEn" type="xs:dateTime" use="optional"/>
         
     </xs:complexType>
 
@@ -81,7 +100,22 @@
     -->
     <xs:complexType name="ProjectMetadataType">
         <!-- TU CÓDIGO AQUÍ -->
-        
+        <xs:sequence>
+            <xs:element name="id" type="cs:UuidType"/>
+            <xs:element name="nombre" type="xs:string"/>
+            <xs:element name="description" type="xs:string" minOccurs="0"/>
+            <xs:element name="responsable" type="cs:ResponsableType"/>
+            <xs:element name="fechaCreacion" type="xs:dateTime"/>
+            <xs:element name="fechaModificacion" type="xs:date" minOccurs="0"/>
+            <xs:element name="status" type="cs:ProjectStatusType"/>
+            <xs:element name="etiquetas" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="etiqueta" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
     </xs:complexType>
 
     <!-- ========== TIPO COMPLEJO: ResponsableType ========== -->
@@ -96,7 +130,12 @@
     -->
     <xs:complexType name="ResponsableType">
         <!-- TU CÓDIGO AQUÍ -->
-        
+        <xs:sequence>
+            <xs:element name="nombre" type="xs:string"/>
+            <xs:element name="email" type="cs:Email"/>
+            <xs:element name="departamento" type="xs:string" minOccurs="0"/>
+            <xs:element name="telefono" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
     </xs:complexType>
 
     <!-- ========== TIPO COMPLEJO: CampanaType ========== -->
@@ -119,7 +158,23 @@
     -->
     <xs:complexType name="CampanaType">
         <!-- TU CÓDIGO AQUÍ -->
-        
+         <xs:sequence>
+            <xs:element name="nombre" type="xs:string"/>
+            <xs:element name="objetivo" type="xs:string" minOccurs="0"/>
+            <xs:element name="fechaInicio" type="xs:dateTime"/>
+            <xs:element name="fechaFin" type="xs:dateTime" minOccurs="0"/>
+            <xs:element name="sondas" minOccurs="1">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="sonda" type="cs:SondaType" minOccurs="1" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="resumen" type="cs:ResumenCampanaType" minOccurs="0"/>
+         </xs:sequence>
+
+         <xs:attribute name="id" type="cs:UuidType" use="required"/>
+         <xs:attribute name="activa" type="xs:boolean" default="true"/>
     </xs:complexType>
 
     <!-- ========== TIPO COMPLEJO: SondaType (COMPLETAR) ========== -->
@@ -151,7 +206,38 @@
     -->
     <xs:complexType name="SondaType">
         <!-- TU CÓDIGO AQUÍ -->
-        
+         <xs:sequence>
+            <xs:element name="nombre" type="xs:string"/>
+            <xs:element name="descripcion" type="xs:string" minOccurs="0"/>
+            <xs:element name="ubicacionFija" type="cs:LocationFullType"/>
+            <xs:element name="macSonda" type="cs:MacAddressType"/>
+            <xs:element name="fechaInstalacion" type="xs:date"/>
+            <xs:element name="ultimoContacto" type="xs:dateTime" minOccurs="0"/>
+            <xs:element name="configuracion" type="cs:SondaConfigType" minOccurs="0"/>
+            <xs:element name="estadisticasSonda" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="totalProbesCapturados" type="xs:nonNegativeInteger"/>
+                        <xs:element name="dispositivosUnicos" type="xs:nonNegativeInteger"/>
+                        <xs:element name="rssiPromedio" type="xs:decimal"/>
+                        <xs:element name="ultimaActualizacion" type="xs:dateTime"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="probes" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="probe" type="cs:WifiProbeType" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+
+                    <xs:attribute name="totalCount" type="xs:nonNegativeInteger"/>
+                </xs:complexType>
+            </xs:element>
+         </xs:sequence>
+
+        <xs:attribute name="id" type="cs:UuidType" use="required"/>
+        <xs:attribute name="status" type="cs:SondaStatusType" default="active"/> <!--preguntar de donde sale este tipo de datos de SondasStatus-->
+        <xs:attribute name="version" type="xs:string" use="optional"/>
     </xs:complexType>
 
     <!-- ========== TIPO COMPLEJO: ResumenCampanaType ========== -->
@@ -167,6 +253,13 @@
     -->
     <xs:complexType name="ResumenCampanaType">
         <!-- TU CÓDIGO AQUÍ -->
+         <xs:sequence>
+            <xs:element name="totalProbes" type="xs:nonNegativeInteger"/>
+            <xs:element name="dispositivosUnicos" type="xs:nonNegativeInteger"/>
+            <xs:element name="rssiPromedio" type="xs:decimal"/>
+            <xs:element name="duracionHoras" type="xs:decimal" minOccurs="0"/>
+            <xs:element name="probesPorHora" type="xs:decimal" minOccurs="0"/>
+         </xs:sequence>
         
     </xs:complexType>
 
@@ -196,7 +289,47 @@
     -->
     <xs:complexType name="EstadisticasGlobalesType">
         <!-- TU CÓDIGO AQUÍ -->
-        
+        <xs:sequence>
+            <xs:element name="totalCampanas" type="xs:nonNegativeInteger"/>
+            <xs:element name="totalSondas" type="xs:nonNegativeInteger"/>
+            <xs:element name="totalProbes" type="xs:nonNegativeInteger"/>
+            <xs:element name="dispositivosUnicosGlobal" type="xs:nonNegativeInteger"/>
+            <xs:element name="ultimaActualizacion" type="xs:dateTime"/>
+            <xs:element name="topDispositivos" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="dispositivo" minOccurs="0" maxOccurs="100">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="mac" type="cs:MacAddressType"/>
+                                    <xs:element name="detecciones" type="xs:positiveInteger"/>
+                                    <xs:element name="primeraDeteccion" type="xs:dateTime"/>
+                                    <xs:element name="UltimaDeteccion" type="xs:dateTime"/>
+                                    <xs:element name="ssdiMaxFrecuente" type="cs:SsidType" minOccurs="0"/>
+                                </xs:sequence>
+
+                                <xs:attribute name="rank" type="xs:positiveInteger"/>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element> <!--fin del tipo topDispositivos-->
+            <xs:element name="distribucionPorUbicacion" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="ubicacion" minOccurs="0" maxOccurs="unbounded">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="edificio" type="cs:EdificioType"/>
+                                    <xs:element name="totalProbes" type="xs:nonNegativeInteger"/>
+                                    <xs:element name="procentaje" type="xs:decimal"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
     </xs:complexType>
 
 </xs:schema>
