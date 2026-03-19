@@ -117,6 +117,15 @@
 
     <!-- Estado de la sonda -->
     <!-- Completar con lo desarrollado en el ejercicio 1 -->
+        <xs:simpleType name="SondaStatusType">
+        <!-- TU CÓDIGO AQUÍ -->
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="ACTIVE"/><!--enumeration es una lista y se elije 1-->
+            <xs:enumeration value="INACTIVE"/>
+            <xs:enumeration value="MAINTENANCE"/>
+            <xs:enumeration value="ERROR"/>
+        </xs:restriction>
+    </xs:simpleType>
 
     <!-- Estado del proyecto -->
     <xs:simpleType name="ProjectStatusType">

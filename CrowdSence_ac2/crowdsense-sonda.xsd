@@ -57,7 +57,6 @@
         </xs:sequence>
     </xs:complexType>
 
-
     <!-- ========== TIPO COMPLEJO: SondaType ========== -->
     <!-- Completar con lo desarrollado en el ejercicio 4 -->
     <!-- 
@@ -89,6 +88,38 @@
     -->
     <xs:complexType name="SondaType">
         <!-- TODO: Implementar en ejercicio 4 -->
+         <xs:sequence>
+            <xs:element name="nombre" type="xs:string"/>
+            <xs:element name="descripcion" type="xs:string" minOccurs="0"/>
+            <xs:element name="ubicacionFija" type="cs:LocationFullType"/>
+            <xs:element name="macSonda" type="cs:MacAddressType"/>
+            <xs:element name="fechaInstalacion" type="xs:date"/>
+            <xs:element name="ultimoContacto" type="xs:dateTime" minOccurs="0"/>
+            <xs:element name="configuracion" type="cs:SondaConfigType" minOccurs="0"/>
+            <xs:element name="estadisticasSonda" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="totalProbesCapturados" type="xs:nonNegativeInteger"/>
+                        <xs:element name="dispositivosUnicos" type="xs:nonNegativeInteger"/>
+                        <xs:element name="rssiPromedio" type="xs:decimal"/>
+                        <xs:element name="ultimaActualizacion" type="xs:dateTime"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element><!--fin del elemento estadisticaSonda-->
+            <xs:element name="probes" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="probe" type="cs:WifiProbeType" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+
+                    <xs:attribute name="totalCount" type="xs:nonNegativeInteger"/>
+                </xs:complexType>
+            </xs:element><!--fin del elemento probes-->
+         </xs:sequence>
+
+        <xs:attribute name="id" type="cs:UuidType" use="required"/>
+        <xs:attribute name="status" type="cs:SondaStatusType" default="ACTIVE"/> <!--preguntar de donde sale este tipo de datos de SondasStatus-->
+        <xs:attribute name="version" type="xs:string" use="optional"/>
     </xs:complexType>
 
     <!-- ========== Elemento raíz para sondas independientes ========== -->

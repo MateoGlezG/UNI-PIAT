@@ -25,7 +25,7 @@
         1. Elemento crowdSenseProject de tipo cs:CrowdSenseProjectType
         
         2. Key "sondaKey" - Garantiza que cada sonda tiene un ID único
-           - selector: .//cs:campana/cs:sondas/cs:sonda
+           - selector: .//cs:campana/cs:sondas/cs:sonda -> .// es porque busca el path en cualquier profindidad
            - field: @id
         
         3. Key "campanaKey" - Garantiza que cada campaña tiene un ID único
@@ -39,6 +39,23 @@
     -->
     <xs:element name="crowdSenseProject" type="cs:CrowdSenseProjectType">
         <!-- TU CÓDIGO AQUÍ: keys y keyrefs -->
+         <!--clave para una sonda-->
+         <xs:key name="sondaKey">
+            <xs:selector xpath=".//cs:campana/cs:sondas/cs.sonda"/> <!--entro al path donde esta la sonda-->
+            <xs:field xpath="@id"/> <!-- dentro del path el elemento que se llama id es el que será la clave de la sonda-->
+         </xs:key>
+
+        <!--clave para una campana-->
+         <xs:key name="campanaKey">
+            <xs:selector xpath="cs:campanas/cs.campana"/> <!--no hace falta el .// porque dentro de corwdsenseproject ya hay campanas no hay que entrar en ningun lado ademas-->
+            <xs:field xpath="@id"/>
+         </xs:key>
+
+         <!--dice que la prueba tiene la misma clave que la sonda-->
+         <xs:keyref name="probeToSondaRef" refer="cs:sondaKey"> <!--hago referencia a la calve de sonda que es lo que voy a comparar conel campo sondaRef de probe-->
+            <xs:selector xpath=".//cs:probe"/> <!--dentro de crowdsense project en cualquier capa donde este cs:probe-->
+            <xs:field xpath="@sondaRef"/><!--el campo de probe que debe ser irgaul que la id de sonda-->
+         </xs:keyref>
         
     </xs:element>
 
@@ -66,13 +83,15 @@
             <xs:element name="catalogoUbicaciones" minOccurs="0">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element name="ubicacion" type="cs:LocationFullType" minOccurs="0" maxOccurs="unbounded"/>                    </xs:sequence>
+                        <xs:element name="ubicacion" type="cs:LocationFullType" minOccurs="0" maxOccurs="unbounded"/>                    
+                    </xs:sequence>
                 </xs:complexType>
             </xs:element>
             <xs:element name="campanas" minOccurs="1" maxOccurs="1">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element name="campana" type="cs:CampanaType" minOccurs="0" maxOccurs="unbounded"/>                    </xs:sequence>
+                        <xs:element name="campana" type="cs:CampanaType" minOccurs="0" maxOccurs="unbounded"/>                    
+                    </xs:sequence>
                 </xs:complexType>
             </xs:element>
             <xs:element name="estadisticas" type="cs:EstadisticasGlobalesType" minOccurs="0"/>
@@ -223,7 +242,7 @@
                         <xs:element name="ultimaActualizacion" type="xs:dateTime"/>
                     </xs:sequence>
                 </xs:complexType>
-            </xs:element>
+            </xs:element><!--fin del elemento estadisticaSonda-->
             <xs:element name="probes" minOccurs="0">
                 <xs:complexType>
                     <xs:sequence>
@@ -232,11 +251,11 @@
 
                     <xs:attribute name="totalCount" type="xs:nonNegativeInteger"/>
                 </xs:complexType>
-            </xs:element>
+            </xs:element><!--fin del elemento probes-->
          </xs:sequence>
 
         <xs:attribute name="id" type="cs:UuidType" use="required"/>
-        <xs:attribute name="status" type="cs:SondaStatusType" default="active"/> <!--preguntar de donde sale este tipo de datos de SondasStatus-->
+        <xs:attribute name="status" type="cs:SondaStatusType" default="ACTIVE"/> <!--preguntar de donde sale este tipo de datos de SondasStatus-->
         <xs:attribute name="version" type="xs:string" use="optional"/>
     </xs:complexType>
 
