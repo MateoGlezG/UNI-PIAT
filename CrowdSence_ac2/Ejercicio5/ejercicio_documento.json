@@ -1,0 +1,230 @@
+{
+  "$comment": "TODO: Completar la referencia al JSON Schema en $schema",
+  
+  "proyecto": {
+    "id": "550e8400-e29b-41d4-a716-446655440000",
+    "nombre": "Análisis Movilidad Campus UPM 2025",
+    "descripcion": "Proyecto de análisis de patrones WiFi",
+    "responsable": {
+      "nombre": "Dr. García López",
+      "email": "garcia.lopez@upm.es",
+      "departamento": "PIAT"
+    },
+    "fechaCreacion": "2025-01-10T09:00:00Z",
+    "status": "IN_PROGRESS",
+    "etiquetas": ["movilidad", "wifi", "campus"]
+  },
+
+  "sondas": [
+    {
+      "id": "sonda001-0001-0001-0001-000000000001",
+      "nombre": "Sonda-Lab-PIAT-01",
+      "status": "ACTIVE",
+      "ubicacion": {
+        "edificio": "UPM-N-10",
+        "bloque": "B1",
+        "planta": "P0",
+        "sala": "L01",
+        "coordenadas": {
+          "lat": 40.389722,
+          "lon": -3.628889
+        }
+      },
+      "macSonda": "AA:BB:CC:DD:EE:01",
+      "configuracion": {
+        "intervaloCaptura": 500,
+        "rssiMinimo": -85,
+        "canales": [1, 6, 11, 36, 44],
+        "modoCaptura": "CONTINUO"
+      }
+    },
+    {
+      "id": "sonda002-0002-0002-0002-000000000002",
+      "nombre": "Sonda-Hall-Principal",
+      "status": "ACTIVE",
+      "ubicacion": {
+        "edificio": "UPM-N-10",
+        "bloque": "B1",
+        "planta": "P0",
+        "sala": "H01"
+      },
+      "macSonda": "AA:BB:CC:DD:EE:02",
+      "configuracion": {
+        "intervaloCaptura": 1000,
+        "rssiMinimo": -90,
+        "canales": [1, 6, 11]
+      }
+    },
+    {
+      "id": "not-valid-uuid",
+      "nombre": "Sonda-Error-UUID",
+      "status": "ACTIVE",
+      "ubicacion": {
+        "edificio": "UPM-N-10",
+        "bloque": "B1",
+        "planta": "P0",
+        "sala": "A01"
+      },
+      "macSonda": "AA:BB:CC:DD:EE:03"
+    },
+    {
+      "id": "sonda004-0004-0004-0004-000000000004",
+      "nombre": "Sonda-Error-Status",
+      "status": "RUNNING",
+      "ubicacion": {
+        "edificio": "UPM-N-10",
+        "bloque": "B1",
+        "planta": "P1",
+        "sala": "A02"
+      },
+      "macSonda": "AA:BB:CC:DD:EE:04"
+    },
+    {
+      "id": "sonda005-0005-0005-0005-000000000005",
+      "nombre": "Sonda-Error-MAC",
+      "status": "ACTIVE",
+      "ubicacion": {
+        "edificio": "UPM-N-10",
+        "bloque": "B1",
+        "planta": "P1",
+        "sala": "A03"
+      },
+      "macSonda": "AABBCCDDEEFF"
+    },
+    {
+      "id": "sonda006-0006-0006-0006-000000000006",
+      "nombre": "Sonda-Error-Intervalo",
+      "status": "ACTIVE",
+      "ubicacion": {
+        "edificio": "UPM-N-10",
+        "bloque": "B1",
+        "planta": "P1",
+        "sala": "A04"
+      },
+      "macSonda": "AA:BB:CC:DD:EE:06",
+      "configuracion": {
+        "intervaloCaptura": 5,
+        "rssiMinimo": -80,
+        "canales": [6]
+      }
+    },
+    {
+      "id": "sonda007-0007-0007-0007-000000000007",
+      "nombre": "Sonda-Error-RSSI",
+      "status": "ACTIVE",
+      "ubicacion": {
+        "edificio": "UPM-N-10",
+        "bloque": "B1",
+        "planta": "P1",
+        "sala": "A05"
+      },
+      "macSonda": "AA:BB:CC:DD:EE:07",
+      "configuracion": {
+        "intervaloCaptura": 1000,
+        "rssiMinimo": 10,
+        "canales": [6]
+      }
+    }
+  ],
+
+  "probes": [
+    {
+      "id": "probe001-0001-0001-0001-000000000001",
+      "sondaRef": "sonda001-0001-0001-0001-000000000001",
+      "timestamp": "2025-01-25T09:15:30Z",
+      "ubicacion": {
+        "edificio": "UPM-N-10",
+        "bloque": "B1",
+        "planta": "P0",
+        "sala": "L01"
+      },
+      "rssi": -65,
+      "macAddress": "11:22:33:44:55:66",
+      "ssid": "eduroam",
+      "canal": 6,
+      "frecuencia": "2.4GHz",
+      "tipoTrama": "PROBE_REQUEST",
+      "fabricante": "Apple"
+    },
+    {
+      "id": "probe002-0002-0002-0002-000000000002",
+      "sondaRef": "sonda001-0001-0001-0001-000000000001",
+      "timestamp": "2025-01-25T09:16:00Z",
+      "ubicacion": {
+        "edificio": "UPM-N-10",
+        "bloque": "B1",
+        "planta": "P0",
+        "sala": "L01"
+      },
+      "rssi": -58,
+      "macAddress": "AA:BB:CC:DD:EE:FF",
+      "ssid": "UPM-WiFi"
+    },
+    {
+      "id": "probe003-0003-0003-0003-000000000003",
+      "sondaRef": "sonda999-9999-9999-9999-999999999999",
+      "timestamp": "2025-01-25T09:17:00Z",
+      "ubicacion": {
+        "edificio": "UPM-N-10",
+        "bloque": "B1",
+        "planta": "P0",
+        "sala": "L01"
+      },
+      "rssi": -70,
+      "macAddress": "DE:AD:BE:EF:CA:FE",
+      "ssid": "eduroam"
+    },
+    {
+      "id": "probe004-error-rssi",
+      "sondaRef": "sonda001-0001-0001-0001-000000000001",
+      "timestamp": "2025-01-25T09:18:00Z",
+      "ubicacion": {
+        "edificio": "UPM-N-10",
+        "bloque": "B1",
+        "planta": "P0",
+        "sala": "L01"
+      },
+      "rssi": 15,
+      "macAddress": "12:34:56:78:9A:BC",
+      "ssid": "test"
+    },
+    {
+      "id": "probe005-0005-0005-0005-000000000005",
+      "sondaRef": "sonda002-0002-0002-0002-000000000002",
+      "timestamp": "2025-01-25T08:45:00Z",
+      "ubicacion": {
+        "edificio": "UPM-N-10",
+        "bloque": "B1",
+        "planta": "P0",
+        "sala": "H01"
+      },
+      "rssi": -45,
+      "macAddress": "DE:AD:BE:EF:CA:FE",
+      "ssid": "eduroam",
+      "tipoTrama": "UNKNOWN_FRAME"
+    },
+    {
+      "id": "probe006-0006-0006-0006-000000000006",
+      "sondaRef": "sonda002-0002-0002-0002-000000000002",
+      "timestamp": "not-a-valid-date",
+      "ubicacion": {
+        "edificio": "UPM-N-10",
+        "bloque": "B1",
+        "planta": "P0",
+        "sala": "H01"
+      },
+      "rssi": -50,
+      "macAddress": "AB:CD:EF:12:34:56",
+      "ssid": "eduroam"
+    }
+  ],
+
+  "estadisticas": {
+    "totalSondas": 7,
+    "totalProbes": 6,
+    "dispositivosUnicos": 5,
+    "rssiPromedio": -55.5,
+    "ultimaActualizacion": "2025-01-25T18:00:00Z",
+    "probesPorHora": 120.5
+  }
+}
