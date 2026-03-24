@@ -10,7 +10,7 @@
   "$comment": "Modelo para bases de datos NoSQL y MCPs",
   "$comment": "============================================",
 
-  "$defs": {
+  "$defs":{
     
     "$comment": "========== TIPOS BÁSICOS (Equivalentes a simpleType en XSD) ==========",
 
@@ -267,36 +267,145 @@
       "$comment": "TODO: Definir modelo de probe (detección WiFi)",
       "$comment": "Propiedades obligatorias: id, sondaRef, timestamp, ubicacion, rssi, macAddress, ssid",
       "$comment": "Propiedades opcionales: canal, frecuencia, tipoTrama, fabricante",
-      "$comment": "timestamp debe usar format: date-time"
+      "$comment": "timestamp debe usar format: date-time",
+
+      "type":"object",
+      "properties": {
+        "id":{
+          "$ref": "#/$defs/UuidType"
+        },
+        "sondaRef":{
+          "$ref": "#/$defs/UuidType"
+        },
+        "timestamp":{
+          "type":"string",
+          "format": "date-time"
+        },
+        "ubicacion":{
+          "$ref": "#/$defs/UbicacionType"
+        },
+        "rssi":{
+          "$ref": "#/$defs/RssiType"
+        },
+         "macAddress":{
+          "$ref": "#/$defs/MacAddressType"
+        },
+        "ssid":{
+          "$ref": "#/$defs/SsidType"
+        },
+        "canal":{
+          "$ref": "#/$defs/CanalWifiType"
+        },
+        "frecuencia":{
+          "$ref": "#/$defs/FrecuenciaWifiType"
+        },
+        "tipoTrama":{
+          "$ref": "#/$defs/TipoTramaType"
+        },
+        "fabricante":{
+          "type":"string"
+        }
+      },
+      "required": ["id","sondaRef","timestamp","ubicacion","rssi","macAddress","ssid"],
+      "additionalProperties": false
     },
 
     "ProyectoMetadataType": {
       "$comment": "TODO: Definir metadatos del proyecto",
       "$comment": "Propiedades obligatorias: id, nombre, responsable, fechaCreacion, status",
-      "$comment": "Propiedades opcionales: descripcion, etiquetas (array de strings)"
-    },
+      "$comment": "Propiedades opcionales: descripcion, etiquetas (array de strings)",
+
+      "type":"object",
+      "properties": {
+        "id":{
+          "$ref": "#/$defs/UuidType"
+        },
+        "nombre":{
+          "type":"string"
+        },
+        "responsable":{
+          "$ref": "#/$defs/ResponsableType"
+        },
+        "fechaCreacion":{
+          "type":"string",
+          "format": "date-time"
+        },
+        "status":{
+          "$ref": "#/$defs/ProjectStatusType"
+        },
+        "descripcion":{
+          "type":"string"
+        },
+        "etiquetas":{
+          "type":"array",
+          "items": {
+            "type":"string"
+          }
+        }
+        },
+        "required": ["id", "nombre", "responsable", "fechaCreacion", "status"],
+        "additionalProperties": false
+      },
 
     "EstadisticasType": {
       "$comment": "TODO: Definir estadísticas globales",
       "$comment": "Propiedades: totalSondas, totalProbes, dispositivosUnicos,",
-      "$comment": "             rssiPromedio, ultimaActualizacion, probesPorHora"
+      "$comment": "rssiPromedio, ultimaActualizacion, probesPorHora",
+
+      "type":"object",
+      "properties":{
+        "totalSondas":{
+          "type":"integer"
+        },
+        "totalProbes":{
+          "type":"integer"
+        },
+        "dispositivosUnicos":{
+          "type":"integer"
+        },
+        "rssiPromedio":{
+          "$ref": "#/$defs/RssiType"
+        },
+        "ultimaActualizacion":{
+          "type":"string",
+          "format": "date-time"
+        },
+        "probesPorHora":{
+          "type":"number"
+        }
+      },
+      "required": ["totalSondas","totalProbes","dispositivosUnicos"],
+      "additionalProperties": false
     }
+    
   },
 
   "$comment": "========== ESTRUCTURA PRINCIPAL DEL DOCUMENTO ==========",
   
   "properties": {
     "proyecto": {
-      "$comment": "TODO: Referenciar ProyectoMetadataType"
+      "$comment": "TODO: Referenciar ProyectoMetadataType",
+      "$ref": "#/$defs/ProyectoMetadataType"
     },
     "sondas": {
-      "$comment": "TODO: Array de SondaType, mínimo 1 elemento"
+      "$comment": "TODO: Array de SondaType, mínimo 1 elemento",
+      "type":"array",
+      "items": {
+        "$ref": "#$defs/SondaType"
+      },
+      "minItems": 1
     },
     "probes": {
-      "$comment": "TODO: Array de ProbeType, puede estar vacío"
+      "$comment": "TODO: Array de ProbeType, puede estar vacío, por defecto minItems=0",
+      "type":"array",
+      "items": {
+        "$ref": "#/$defs/ProbeType"
+      },
+      "minItems": 0
     },
     "estadisticas": {
-      "$comment": "TODO: Referenciar EstadisticasType (opcional)"
+      "$comment": "TODO: Referenciar EstadisticasType (opcional)", 
+      "$ref": "$#/$defs/EstadisticasType"
     }
   },
 
