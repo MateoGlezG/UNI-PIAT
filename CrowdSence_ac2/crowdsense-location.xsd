@@ -25,13 +25,13 @@
 
     <xs:complexType name="LocationIDType">
         <xs:sequence>
-            <xs:element name="edificio" type="cs:EdificioType" minOccurs="1"/>
+            <xs:element name="edificio" type="cs:EdificioType" minOccurs="1"/><!--minOccurs es para ponerlo obligatorio, por defecto en elementos esta en 1, si se quire poner opcional es 0-->
             <xs:element name="bloque" type="cs:BloqueType"/>
             <xs:element name="planta" type="cs:PlantaType"/>
             <xs:element name="sala" type="cs:SalaType"/>
         </xs:sequence>
 
-        <xs:attribute name="lat" type="cs:LatitudType" use="optional"/>
+        <xs:attribute name="lat" type="cs:LatitudType" use="optional"/> <!--en los atributos para que sean obligatorios es con use, optional para q no lo sea y required para que lo sea-->
         <xs:attribute name="lon" type="cs:LongitudType" use="optional"/>
     </xs:complexType>
 
@@ -46,12 +46,12 @@
     -->
 
     <xs:complexType name="LocationFullType">
-        <xs:complexContent>
+        <xs:complexContent> <!--se usa cuando un tipo de datos complejos va a heredar de otro -->
             <xs:extension base="cs:LocationIDType"> <!--le digo de que tipo de datos heredo-->
                 <xs:sequence>
                     <xs:element name="descripcion" type="xs:string" minOccurs="0"/>
                     <xs:element name="capacidad" type="xs:positiveInteger" minOccurs="0"/>
-                    <!--<xs:element name="tipoEspacio" type="cs:TipoEspacioType" minOccurs="0"/> comentado pendiete de confirmar el tipo -->
+                    <xs:element name="tipoEspacio" type="cs:TipoEspacioType" minOccurs="0"/> 
                     <xs:element name="superficie" type="cs:SuperficieType" minOccurs="0"/>
                    
                     <xs:element name="equipamiento" minOccurs="0">
@@ -81,5 +81,6 @@
             <xs:documentation>Elemento de ubicación extendida reutilizable</xs:documentation>
         </xs:annotation>
     </xs:element>
+    <!--uso el ref para una referecnia al elemento ubicacion completa referido arriba y puedo luego poner las espcificaciones que quiera ref="prefijo:type"-->
 
 </xs:schema>
