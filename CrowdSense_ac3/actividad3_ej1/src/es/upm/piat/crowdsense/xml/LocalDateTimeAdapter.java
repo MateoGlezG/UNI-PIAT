@@ -22,7 +22,14 @@ public class LocalDateTimeAdapter extends XmlAdapter<String, LocalDateTime> {
         // 1. Si xmlValue es null o vacío, return null
         // 2. Quitar 'Z' si existe: xmlValue.replace("Z", "")
         // 3. Parsear: LocalDateTime.parse(normalized, FORMATTER)
-        return null;
+    	LocalDateTime fecha;
+    	if(xmlValue.isEmpty() || xmlValue == null) {
+    		fecha = null;
+    	}else {
+    		xmlValue.replace("Z", "");
+    		fecha=LocalDateTime.parse(xmlValue, FORMATTER); //doy el valor a la fecha parseando el string a una fecha 
+    	}
+    	return fecha;
     }
     
     @Override
@@ -30,6 +37,12 @@ public class LocalDateTimeAdapter extends XmlAdapter<String, LocalDateTime> {
         // TODO: Implementar
         // 1. Si javaValue es null, return null
         // 2. Formatear: javaValue.format(FORMATTER)
-        return null;
+    	String string ;
+    	if(javaValue==null) {
+    		string = null;
+    	}else {
+    		string = javaValue.format(FORMATTER);
+    	}
+        return string;
     }
 }

@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import jakarta.xml.bind.annotation.*;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import es.upm.piat.crowdsense.xml.LocalDateTimeAdapter;
 
 /**
  * EJERCICIO 1: A
@@ -24,30 +25,41 @@ import es.upm.piat.crowdsense.xml.LocalDateTimeAdapter;ñadir anotaciones JAXB a
  */
 // TODO: Añadir @XmlAccessorType(XmlAccessType.FIELD)
 // TODO: Añadir @XmlType(propOrder = {"timestamp", "location", "rssi", "macAddress", "ssid"})
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(propOrder = {"timestap", "location", "rssi", "macAddress", "ssid"})
 public class WifiProbe {
     
     // TODO: Añadir @XmlAttribute(name = "id", required = true)
+	@XmlAttribute(name = "id", required=true)
     private String id;
     
     // TODO: Añadir campo sondaRef con @XmlAttribute(name = "sondaRef", required = true)
-    // private String sondaRef;
+	@XmlAttribute(name="sondaRef", required=true)
+    private String sondaRef;
     
     // TODO: Añadir campo secuencia con @XmlAttribute(name = "secuencia")
-    // private Integer secuencia;
+	@XmlAttribute(name="secuencia")
+    private Integer secuencia;
     
     // TODO: Añadir @XmlElement(required = true) y @XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
+	@XmlElement(required = true)
+	@XmlJavaTypeAdapter(LocalDateTimeAdapter.class) //adapto el dato usando esa clase
     private LocalDateTime timestamp;
     
     // TODO: Añadir @XmlElement(required = true)
+	@XmlElement(required = true)
     private LocationID location;
     
     // TODO: Añadir @XmlElement(required = true)
+	@XmlElement(required = true)
     private int rssi;
     
     // TODO: Añadir @XmlElement(required = true)
+	@XmlElement(required = true)
     private String macAddress;
     
     // TODO: Añadir @XmlElement(required = true)
+	@XmlElement(required = true)
     private String ssid;
 
     public WifiProbe() {}

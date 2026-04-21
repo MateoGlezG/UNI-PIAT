@@ -6,10 +6,30 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/VORPC/Desktop/UNI/PIAT/CrowdSense_ac3/libs_act3/angus-activation-2.0.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/VORPC/Desktop/UNI/PIAT/CrowdSense_ac3/libs_act3/jakarta.activation-api-2.1.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/VORPC/Desktop/UNI/PIAT/CrowdSense_ac3/libs_act3/jakarta.xml.bind-api-4.0.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/VORPC/Desktop/UNI/PIAT/CrowdSense_ac3/libs_act3/jaxb-core-4.0.5.jar"/>
-	<classpathentry kind="lib" path="C:/Users/VORPC/Desktop/UNI/PIAT/CrowdSense_ac3/libs_act3/jaxb-impl-4.0.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/mateo/OneDrive/Escritorio/UNI/PIAT/CrowdSense_ac3/libs_act3/angus-activation-2.0.2.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/mateo/OneDrive/Escritorio/UNI/PIAT/CrowdSense_ac3/libs_act3/jakarta.activation-api-2.1.3.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/mateo/OneDrive/Escritorio/UNI/PIAT/CrowdSense_ac3/libs_act3/jakarta.xml.bind-api-4.0.2.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/mateo/OneDrive/Escritorio/UNI/PIAT/CrowdSense_ac3/libs_act3/jaxb-core-4.0.5.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/mateo/OneDrive/Escritorio/UNI/PIAT/CrowdSense_ac3/libs_act3/jaxb-impl-4.0.5.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

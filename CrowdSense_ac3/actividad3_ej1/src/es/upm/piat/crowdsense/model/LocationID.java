@@ -6,24 +6,30 @@ import jakarta.xml.bind.annotation.*;
  * EJERCICIO 1: Añadir anotaciones JAXB a esta clase de la Actividad 1.
  * 
  * Anotaciones necesarias:
- * - @XmlAccessorType(XmlAccessType.FIELD) -> en la clase
- * - @XmlType(propOrder = {"edificio", "bloque", "planta", "sala"}) -> en la clase
- * - @XmlElement(required = true) -> en cada campo
+ * - @XmlAccessorType(XmlAccessType.FIELD) -> en la clase, dice como se deba acceder a la informacion, FILD -> debe mirar los campos directamente para mapearlos
+ * - @XmlType(propOrder = {"edificio", "bloque", "planta", "sala"}) -> en la clase, orden de los elementos
+ * - @XmlElement(required = true) -> en cada campo, obligatorio
  */
 // TODO: Añadir @XmlAccessorType(XmlAccessType.FIELD)
 // TODO: Añadir @XmlType(propOrder = {"edificio", "bloque", "planta", "sala"})
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(propOrder = {"edificio", "bloque", "planta", "sala"})
 public class LocationID {
     
     // TODO: Añadir @XmlElement(required = true)
+	@XmlElement(required=true)
     private String edificio;
     
     // TODO: Añadir @XmlElement(required = true)
+	@XmlElement(required=true)
     private String bloque;
     
     // TODO: Añadir @XmlElement(required = true)
+	@XmlElement(required=true)
     private String planta;
     
     // TODO: Añadir @XmlElement(required = true)
+	@XmlElement(required=true)
     private String sala;
 
     public LocationID() {}
