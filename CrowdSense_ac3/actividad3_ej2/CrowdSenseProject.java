@@ -27,19 +27,28 @@ import es.upm.piat.crowdsense.xml.LocalDateTimeAdapter;
 // TODO: Añadir @XmlRootElement(name = "crowdSenseProject", namespace = "http://upm.es/piat/crowdsense")
 // TODO: Añadir @XmlAccessorType(XmlAccessType.FIELD)
 // TODO: Añadir @XmlType(propOrder = {"metadata", "campanas", "estadisticas"})
+@XmlRootElement(name="crowdSenseProject", namespace="http://upm.es/piat/crowdsense")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(propOrder={"metadata", "campanas", "estadisticas"})
 public class CrowdSenseProject {
     
     // TODO: Añadir @XmlAttribute
+	@XmlAttribute
     private String version = "1.0";
     
     // TODO: Añadir @XmlAttribute y @XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
+	@XmlAttribute
+	@XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
     private LocalDateTime generadoEn;
     
     // TODO: Añadir @XmlElement(required = true)
+	@XmlElement(required = true)
     private Metadata metadata;
     
     // TODO: Añadir @XmlElementWrapper(name = "campanas")
     // TODO: Añadir @XmlElement(name = "campana")
+	@XmlElementWrapper(name="campanas")
+	@XmlElement(name="")
     private List<Campana> campanas = new ArrayList<>();
     
     // TODO: Añadir @XmlElement
@@ -68,24 +77,24 @@ public class CrowdSenseProject {
         estadisticas = new Estadisticas();
         
         // TODO: Implementar
-        // int totalProbes = 0;
-        // int totalSondas = 0;
-        // Set<String> dispositivosUnicos = new HashSet<>();
+    	int totalProbes = 0;
+    	int totalSondas = 0;
+    	Set<String> dispositivosUnicos = new HashSet<>();
         // 
-        // for (Campana campana : campanas) {
-        //     totalSondas += campana.getSondas().size();
-        //     for (Sonda sonda : campana.getSondas()) {
-        //         for (WifiProbe probe : sonda.getProbes()) {
-        //             totalProbes++;
-        //             dispositivosUnicos.add(probe.getMacAddress().toLowerCase());
-        //         }
-        //     }
-        // }
+    	for (Campana campana : campanas) {
+    	    totalSondas += campana.getSondas().size();
+    	    for (Sonda sonda : campana.getSondas()) {
+    	        for (WifiProbe probe : sonda.getProbes()) {
+    	            totalProbes++;
+    	            dispositivosUnicos.add(probe.getMacAddress().toLowerCase());
+    	        }
+    	    }
+    	}
         // 
-        // estadisticas.setTotalCampanas(campanas.size());
-        // estadisticas.setTotalSondas(totalSondas);
-        // estadisticas.setTotalProbes(totalProbes);
-        // estadisticas.setDispositivosUnicosGlobal(dispositivosUnicos.size());
+    	estadisticas.setTotalCampanas(campanas.size());
+    	estadisticas.setTotalSondas(totalSondas);
+    	estadisticas.setTotalProbes(totalProbes);
+    	estadisticas.setDispositivosUnicosGlobal(dispositivosUnicos.size());
     }
     
     // Getters
