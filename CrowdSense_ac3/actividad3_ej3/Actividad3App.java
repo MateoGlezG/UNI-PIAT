@@ -7,23 +7,6 @@ import es.upm.piat.crowdsense.model.CrowdSenseProject;
 import es.upm.piat.crowdsense.xml.ProjectBuilder;
 import es.upm.piat.crowdsense.xml.ProjectExporter;
 
-/**
- * EJERCICIO 2: Aplicación principal.
- * 
- * PREREQUISITO: Copiad de vuestra Actividad 1:
- *   - es.upm.piat.crowdsense.ingestion.LogIngestor
- *   - es.upm.piat.crowdsense.util.CrowdRegexManager
- * 
- * Y añadid este método a LogIngestor:
- * 
- *   public List<WifiProbe> getProbes() {
- *       List<WifiProbe> allProbes = new ArrayList<>();
- *       for (List<WifiProbe> probeList : database.values()) {
- *           allProbes.addAll(probeList);
- *       }
- *       return allProbes;
- *   }
- */
 public class Actividad3App {
     
     public static void main(String[] args) {
