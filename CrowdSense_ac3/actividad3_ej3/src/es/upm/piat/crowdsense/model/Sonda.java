@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import es.upm.piat.crowdsense.xml.LocalDateAdapter;
 
 /**
  * Representa una sonda/sensor de captura WiFi.

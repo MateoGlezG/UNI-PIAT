@@ -2,7 +2,7 @@ package es.upm.piat.crowdsense;
 
 import java.io.File;
 
-import es.upm.piat.crowdsense.ingestion.LogIngestor;
+import es.upm.piat.crowdsense.ingestion.*;
 import es.upm.piat.crowdsense.model.CrowdSenseProject;
 import es.upm.piat.crowdsense.xml.ProjectBuilder;
 import es.upm.piat.crowdsense.xml.ProjectExporter;

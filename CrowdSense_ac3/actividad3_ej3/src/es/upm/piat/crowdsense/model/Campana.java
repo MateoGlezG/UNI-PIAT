@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-import es.upm.piat.crowdsense.xml.LocalDateTimeAdapter;
 
 /**
  * Representa una campaña de medición dentro del proyecto.

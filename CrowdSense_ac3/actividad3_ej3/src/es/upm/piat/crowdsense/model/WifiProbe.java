@@ -4,8 +4,6 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 
-import es.upm.piat.crowdsense.xml.LocalDateTimeAdapter;
-
 /**
  * Objeto que representa una trama WiFi limpia y validada.
  */

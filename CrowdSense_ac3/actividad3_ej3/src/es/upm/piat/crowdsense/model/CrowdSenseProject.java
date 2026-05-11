@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-import es.upm.piat.crowdsense.xml.LocalDateTimeAdapter;
 
 //no hay anotaciones con StAX
 
@@ -71,8 +70,7 @@ public class CrowdSenseProject {
     public LocalDateTime getGeneradoEn() { return generadoEn; }
     public Metadata getMetadata() { return metadata; }
     public List<Campana> getCampanas() { return campanas; }
-    public Estadisticas getEstadisticas() { return estadisticas; }
-    
+    public Estadisticas getEstadisticas() { return estadisticas; }  
     // Setters
     public void setVersion(String version) { this.version = version; }
     public void setGeneradoEn(LocalDateTime generadoEn) { this.generadoEn = generadoEn; }
@@ -80,17 +78,13 @@ public class CrowdSenseProject {
     public void setCampanas(List<Campana> campanas) { this.campanas = campanas; }
     public void setEstadisticas(Estadisticas estadisticas) { this.estadisticas = estadisticas; }
     
+    //clase metadata
     public static class Metadata {
-        @XmlElement(required = true)
+      
         private String id;
-        @XmlElement(required = true)
         private String nombre;
-        @XmlElement(required = true)
         private String responsable;
-        @XmlElement(required = true)
         private String email;
-        @XmlElement(required = true)
-        @XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
         private LocalDateTime fechaCreacion;
         
         public Metadata() {}
@@ -115,6 +109,7 @@ public class CrowdSenseProject {
         public void setFechaCreacion(LocalDateTime fechaCreacion) { this.fechaCreacion = fechaCreacion; }
     }
 
+    //clase estadisticas
     public static class Estadisticas {
       
         private Integer totalCampanas;

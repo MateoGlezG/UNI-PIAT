@@ -1,13 +1,19 @@
 package es.upm.piat.crowdsense.xml;
 
 import java.io.File;
-import java.io.StringWriter;
+import java.io.FileOutputStream;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamWriter;
+import javax.xml.stream.*;
 
-import es.upm.piat.crowdsense.model.CrowdSenseProject;
-
+import es.upm.piat.crowdsense.model.*;
+import es.upm.piat.crowdsense.model.Campana.ResumenCampana;
+import es.upm.piat.crowdsense.model.CrowdSenseProject.Estadisticas;
+import es.upm.piat.crowdsense.model.CrowdSenseProject.Metadata;
 /**
  * EJERCICIO 3:
  *  writeAttribute() debe llamarse INMEDIATAMENTE después de writeStartElement(), antes de
@@ -23,13 +29,6 @@ public class ProjectExporter {
 
     
 	//para escribir a fichero
-	FileOutputStream fos = new FileOutputStream(outputFile);
-	XMLStreamWriter w = XMLOutputFactory.newInstance().createXMLStreamWriter(fos, "UTF-8");
-	
-	//para escribir a String
-	StringWriter sw = new StringWriter();
-	XMLStreamWriter w = XMLOutputFactory.newInstance().createXMLStreamWriter(sw);
-    
     public void exportToFile(CrowdSenseProject project, File outputFile) throws Exception {
         // TODO: Implementar
     	try (FileOutputStream fos = new FileOutputStream(outputFile)) {
@@ -51,7 +50,7 @@ public class ProjectExporter {
     private String fmt(LocalDateTime dt) {
     	return dt != null ? dt.format(DT_FMT) : "";
     }
-    private Strinf fmt(LocalDate d) {
+    private String fmt(LocalDate d) {
     	return d != null ? d.format(D_FMT) : "";
     }
     
@@ -94,7 +93,7 @@ public class ProjectExporter {
     	w.writeEndElement(); // </campanas>
     }
     
-    private void writeCampana(XMLStreamWriter w, Campana c) throws XMLStreamWriterException{
+    private void writeCampana(XMLStreamWriter w, Campana c) throws XMLStreamException{
     	w.writeStartElement("campana");
     	w.writeAttribute("id", c.getId()); // atributo ANTES de los hijos, siempre inmediatamende despues de startElement
     	elem(w, "nombre", c.getNombre());
@@ -105,22 +104,22 @@ public class ProjectExporter {
     }
     
     //declaracion de los elementos Sondas y Sonda
-    private void writeSondas(XMLStreamWriter w, CrowdSenseProject cs) throws XMLStreamException {
+    private void writeSondas(XMLStreamWriter w, Campana c) throws XMLStreamException {
     	w.writeStartElement("sondas");
-    	for (Sonda s : cs.getSondas()) {
+    	for (Sonda s : c.getSondas()) {
     		writeSonda(w, s); //va rellenando con los elementos campanas que tenga 
     	}
     	w.writeEndElement(); // </sondas>
     }
     
-    private void writeSonda(XMLStreamWriter w, Sonda s) throws XMLStreamWriterException{
+    private void writeSonda(XMLStreamWriter w, Sonda s) throws XMLStreamException{
     	w.writeStartElement("sonda");
     	w.writeAttribute("id", s.getId()); // atributo ANTES de los hijos, siempre inmediatamende despues de startElement
     	w.writeAttribute("status", s.getStatus());
     	elem(w, "nombre", s.getNombre());
     	elem(w, "ubicacionRef",s.getUbicacionRef());
     	elem(w, "macSonda", s.getMacSonda());
-    	elem(w, "fechaInstalacion", fmt(c.getFechaInstalacion()));
+    	elem(w, "fechaInstalacion", fmt(s.getFechaInstalacion()));
     	writeProbes(w, s);
     	w.writeEndElement(); // </campana>
     }
