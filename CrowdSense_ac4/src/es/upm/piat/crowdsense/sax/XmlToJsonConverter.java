@@ -10,6 +10,8 @@ import javax.xml.parsers.SAXParserFactory;
 
 import org.xml.sax.InputSource;
 
+import es.upm.piat.crowdsense.json.CrowdSenseHandler;
+
 /**
  * Fachada que orquesta la conversión XML → JSON usando SAX.
  *
