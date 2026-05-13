@@ -105,14 +105,20 @@ public class JsonBuilder {
             sb.append("null");
         } else {
             try {
-                // Intentamos Integer primero, luego Double
-                if (rawValue.contains(".")) {
-                    sb.append(Double.parseDouble(rawValue));
+                // Normaliza: quita espacios y convierte coma decimal a punto
+                String normalized = rawValue.trim().replace(',', '.');
+                if (normalized.contains(".")) {
+                    double d = Double.parseDouble(normalized);
+                    if (Double.isNaN(d) || Double.isInfinite(d)) {
+                        sb.append("null");
+                    } else {
+                        sb.append(d);
+                    }
                 } else {
-                    sb.append(Long.parseLong(rawValue));
+                    sb.append(Long.parseLong(normalized));
                 }
             } catch (NumberFormatException e) {
-                sb.append("null"); // Dato corrupto → null es JSON válido
+                sb.append("null");
             }
         }
         return this;
@@ -178,4 +184,5 @@ public class JsonBuilder {
                 .replace("\r", "\\r")
                 .replace("\t", "\\t");
     }
+    
 }

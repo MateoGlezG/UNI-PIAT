@@ -59,6 +59,33 @@ public class CrowdSenseHandler {
 				json.addKey("estadisticas");
 				json.startObject();
 				break;
+			case "resumen":
+				enResumenCampana = true;
+				json.addKey("resumen");
+				json.startObject();
+				break;
+			case "campanas":
+				break;
+			case "sondas":
+				break;
+			case "probes":
+				break;
+			case "probe":
+				if(enSonda) {
+					enProbe = true;
+					json.startObject();	
+					json.addString("id", attrOrEmpty(attrs, "id"));
+					json.addString("sondaRef", attrOrEmpty(attrs, "sondaRef"));
+					json.addNumber("secuncia", attrOrEmpty(attrs, "secuencia"));
+					json.addString("timestamp", attrOrEmpty(attrs, "timestamp"));
+					//location
+					json.addNumber("rssi", attrOrEmpty(attrs, "rssi"));
+					json.addString("macAddres", attrOrEmpty(attrs, "macAddress"));
+					json.addString("ssid", attrOrEmpty(attrs, "ssid"));
+				}
+				break;
+			case "location":
+				break;
 				
 		 }//fin del sw
 	}
