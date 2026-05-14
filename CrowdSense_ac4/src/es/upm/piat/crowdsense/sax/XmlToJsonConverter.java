@@ -3,7 +3,6 @@ package es.upm.piat.crowdsense.sax;
 import java.io.File;
 import java.io.InputStream;
 import java.io.StringReader;
-import java.nio.file.Files;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
