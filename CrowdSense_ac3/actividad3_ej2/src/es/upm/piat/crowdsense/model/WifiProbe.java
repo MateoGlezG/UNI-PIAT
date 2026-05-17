@@ -5,7 +5,6 @@ import java.util.UUID;
 
 import jakarta.xml.bind.annotation.*;
 import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
 import es.upm.piat.crowdsense.xml.LocalDateTimeAdapter;
 
 /**

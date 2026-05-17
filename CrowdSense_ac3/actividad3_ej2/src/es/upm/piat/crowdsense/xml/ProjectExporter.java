@@ -23,26 +23,24 @@ public class ProjectExporter {
     
     public ProjectExporter() throws JAXBException {
         // TODO: Crear JAXBContext
-        // this.context = JAXBContext.newInstance(CrowdSenseProject.class);
-        this.context = null;
+        this.context = JAXBContext.newInstance(CrowdSenseProject.class);
     }
     
     public void exportToFile(CrowdSenseProject project, File outputFile) throws JAXBException {
         // TODO: Implementar
-        // Marshaller marshaller = context.createMarshaller();
-        // marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-        // marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
-        // marshaller.marshal(project, outputFile);
+        Marshaller marshaller = context.createMarshaller();
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+        marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
+        marshaller.marshal(project, outputFile);
     }
     
     public String exportToString(CrowdSenseProject project) throws JAXBException {
         // TODO: Implementar
-        // Marshaller marshaller = context.createMarshaller();
-        // marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-        // marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
-        // StringWriter writer = new StringWriter();
-        // marshaller.marshal(project, writer);
-        // return writer.toString();
-        return null;
+        Marshaller marshaller = context.createMarshaller();
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+        marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
+        StringWriter writer = new StringWriter();
+        marshaller.marshal(project, writer);
+        return writer.toString();
     }
 }

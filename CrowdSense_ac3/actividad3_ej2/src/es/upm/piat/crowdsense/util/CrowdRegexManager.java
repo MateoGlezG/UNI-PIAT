@@ -1,3 +1,4 @@
+package es.upm.piat.crowdsense.util;
 import java.util.regex.Pattern;
 
 public class CrowdRegexManager {

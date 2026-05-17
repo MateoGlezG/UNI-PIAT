@@ -1,3 +1,4 @@
+package es.upm.piat.crowdsense.ingestion;
 
 import es.upm.piat.crowdsense.model.LocationID;
 import es.upm.piat.crowdsense.model.WifiProbe;

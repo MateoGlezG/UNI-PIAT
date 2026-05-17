@@ -24,7 +24,7 @@ import es.upm.piat.crowdsense.xml.ProjectExporter;
  *       return allProbes;
  *   }
  */
-public class Actividad3App {
+public class Actividad3AppEj2 {
     
     public static void main(String[] args) {
         String file = "raw_datalake.log";
@@ -71,5 +71,6 @@ public class Actividad3App {
             System.err.println("ERROR: " + e.getMessage());
             e.printStackTrace();
         }
-    }
+        
+    }//fin del main 
 }
