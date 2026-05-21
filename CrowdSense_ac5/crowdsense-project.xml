@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Dataset de entrada para la Actividad 5 (XPath).
+
+  Estructura:
+    crowdSenseProject (raíz, atributos: version, generadoEn)
+      metadata          → nombre, responsable, fechaCreacion
+      estadisticas      → totalCampanas, totalProbes
+      sondas            → varias <sonda status="ACTIVE|INACTIVE">
+                            nombre, ubicacionRef
+                            probes → varios <probe secuencia="N">
+                                       macAddress, ssid, rssi,
+                                       timestamp, location/edificio, location/planta
+
+  Namespace por defecto: http://upm.es/piat/crowdsense
+  En las consultas XPath se debe usar el prefijo "cs:" (registrado por
+  XPathQueryEngine), porque el JDK XPath no resuelve namespaces sin prefijo.
+-->
+<crowdSenseProject xmlns="http://upm.es/piat/crowdsense"
+                   version="1.0"
+                   generadoEn="2026-04-30T10:00:00">
+
+  <metadata>
+    <nombre>Análisis WiFi Edificio Norte</nombre>
+    <responsable>Estudiante PIAT</responsable>
+    <fechaCreacion>2026-04-15</fechaCreacion>
+  </metadata>
+
+  <estadisticas>
+    <totalCampanas>2</totalCampanas>
+    <totalProbes>10</totalProbes>
+  </estadisticas>
+
+  <sondas>
+
+    <sonda status="ACTIVE">
+      <nombre>Sonda-L01</nombre>
+      <ubicacionRef>UPM-N-10.B1.P0.L01</ubicacionRef>
+      <probes>
+        <probe secuencia="1">
+          <macAddress>AA:BB:CC:DD:EE:FF</macAddress>
+          <ssid>eduroam</ssid>
+          <rssi>-72</rssi>
+          <timestamp>2026-04-20T09:15:23</timestamp>
+          <location>
+            <edificio>UPM-N-10</edificio>
+            <planta>0</planta>
+          </location>
+        </probe>
+        <probe secuencia="2">
+          <macAddress>11:22:33:44:55:66</macAddress>
+          <ssid>UPM-Guest</ssid>
+          <rssi>-65</rssi>
+          <timestamp>2026-04-20T09:18:11</timestamp>
+          <location>
+            <edificio>UPM-N-10</edificio>
+            <planta>0</planta>
+          </location>
+        </probe>
+        <probe secuencia="3">
+          <macAddress>DE:AD:BE:EF:00:01</macAddress>
+          <ssid>eduroam</ssid>
+          <rssi>-58</rssi>
+          <timestamp>2026-04-20T09:22:05</timestamp>
+          <location>
+            <edificio>UPM-N-10</edificio>
+            <planta>1</planta>
+          </location>
+        </probe>
+      </probes>
+    </sonda>
+
+    <sonda status="ACTIVE">
+      <nombre>Sonda-A02</nombre>
+      <ubicacionRef>UPM-N-10.B1.P1.A02</ubicacionRef>
+      <probes>
+        <probe secuencia="1">
+          <macAddress>CA:FE:BA:BE:00:11</macAddress>
+          <ssid>UPM-Staff</ssid>
+          <rssi>-75</rssi>
+          <timestamp>2026-04-20T10:05:42</timestamp>
+          <location>
+            <edificio>UPM-N-10</edificio>
+            <planta>1</planta>
+          </location>
+        </probe>
+        <probe secuencia="2">
+          <macAddress>F0:F0:F0:F0:F0:F0</macAddress>
+          <ssid>eduroam</ssid>
+          <rssi>-62</rssi>
+          <timestamp>2026-04-20T10:10:01</timestamp>
+          <location>
+            <edificio>UPM-N-10</edificio>
+            <planta>1</planta>
+          </location>
+        </probe>
+      </probes>
+    </sonda>
+
+    <sonda status="INACTIVE">
+      <nombre>Sonda-S03</nombre>
+      <ubicacionRef>UPM-S-05.B1.P0.S03</ubicacionRef>
+      <probes>
+        <probe secuencia="1">
+          <macAddress>12:34:56:78:9A:BC</macAddress>
+          <ssid>UPM-Guest</ssid>
+          <rssi>-80</rssi>
+          <timestamp>2026-04-20T11:30:00</timestamp>
+          <location>
+            <edificio>UPM-S-05</edificio>
+            <planta>0</planta>
+          </location>
+        </probe>
+      </probes>
+    </sonda>
+
+    <sonda status="ACTIVE">
+      <nombre>Sonda-E04</nombre>
+      <ubicacionRef>UPM-E-12.B2.P3.E04</ubicacionRef>
+      <probes>
+        <probe secuencia="1">
+          <macAddress>AB:CD:EF:01:23:45</macAddress>
+          <ssid>eduroam</ssid>
+          <rssi>-55</rssi>
+          <timestamp>2026-04-20T12:45:30</timestamp>
+          <location>
+            <edificio>UPM-E-12</edificio>
+            <planta>3</planta>
+          </location>
+        </probe>
+        <probe secuencia="2">
+          <macAddress>99:88:77:66:55:44</macAddress>
+          <ssid>UPM-IoT</ssid>
+          <rssi>-71</rssi>
+          <timestamp>2026-04-20T12:48:15</timestamp>
+          <location>
+            <edificio>UPM-E-12</edificio>
+            <planta>3</planta>
+          </location>
+        </probe>
+        <probe secuencia="3">
+          <macAddress>77:66:55:44:33:22</macAddress>
+          <ssid>eduroam</ssid>
+          <rssi>-68</rssi>
+          <timestamp>2026-04-20T12:55:42</timestamp>
+          <location>
+            <edificio>UPM-E-12</edificio>
+            <planta>3</planta>
+          </location>
+        </probe>
+        <probe secuencia="4">
+          <macAddress>BB:AA:99:88:77:66</macAddress>
+          <ssid>UPM-Guest</ssid>
+          <rssi>-69</rssi>
+          <timestamp>2026-04-20T13:01:08</timestamp>
+          <location>
+            <edificio>UPM-E-12</edificio>
+            <planta>3</planta>
+          </location>
+        </probe>
+      </probes>
+    </sonda>
+
+  </sondas>
+</crowdSenseProject>
