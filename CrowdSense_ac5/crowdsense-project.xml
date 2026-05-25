@@ -15,6 +15,33 @@
   Namespace por defecto: http://upm.es/piat/crowdsense
   En las consultas XPath se debe usar el prefijo "cs:" (registrado por
   XPathQueryEngine), porque el JDK XPath no resuelve namespaces sin prefijo.
+  
+  DOM:
+ *     <?xml version="1.0"?>
+		crowdSenseProject @version @generadoEn
+		L metadata
+		|	L nombreProyecto
+		|	L responsable
+		|	L fechaCreacion
+		|
+		L estadisticas
+		|	L totalCampanas
+		|	L totalProbes
+		|
+		L sondas
+			L sonda @id @status
+				L nombre
+				L ubicacionRef
+				L probes
+					L probe @secuencia
+						L mac
+						L ssid
+						L rssi
+						L timestamp
+						L location 
+							L edificio
+							L planta
+  
 -->
 <crowdSenseProject xmlns="http://upm.es/piat/crowdsense"
                    version="1.0"
