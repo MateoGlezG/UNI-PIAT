@@ -239,7 +239,7 @@ public final class CrowdSenseQueries {
      * no soportado por el JDK).
      * Tipo de resultado: lista.
      */
-    public static final String TODOS_RSSI = "//cs:probes/cs:probes/cs:rssi"; // TODO: completar
+    public static final String TODOS_RSSI = "//cs:probes/cs:probe/cs:rssi"; // TODO: completar
 
     /**
      * Consulta 3.4: Suma de TODOS los RSSI.
@@ -247,7 +247,7 @@ public final class CrowdSenseQueries {
      * Junto con COUNT_PROBES permite calcular el promedio.
      * Tipo de resultado: número.
      */
-    public static final String RSSI_SUM = "sum(//cs:probes/cs:probes/cs:rssi)"; // TODO: completar
+    public static final String RSSI_SUM = "sum(//cs:probes/cs:probe/cs:rssi)"; // TODO: completar
 
     /**
      * Consulta 3.5: Cantidad de probes con señal débil (RSSI < -70).
@@ -256,7 +256,7 @@ public final class CrowdSenseQueries {
      * Pista: count() puede recibir cualquier expresión que devuelva un
      *        node-set, incluyendo una con predicado.
      */
-    public static final String COUNT_SENAL_DEBIL = "count(//cs:probe[cs:ssid < -70])"; // TODO: completar
+    public static final String COUNT_SENAL_DEBIL = "count(//cs:probes/cs:probe[cs:rssi < -70])"; // TODO: completar
 
     /**
      * Consulta 3.6: Longitud (número de caracteres) del nombre del proyecto.

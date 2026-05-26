@@ -23,7 +23,7 @@ import es.upm.piat.crowdsense.model.CrowdSenseProject.Metadata;
  */
 public class ProjectExporter {
 	
-	private static final String NS = "https://upm.es/piat/crowdsense";
+	private static final String NS = "http://upm.es/piat/crowdsense";
 	private static final DateTimeFormatter DT_FMT = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
 	private static final DateTimeFormatter D_FMT = DateTimeFormatter.ISO_LOCAL_DATE;
 
@@ -31,11 +31,17 @@ public class ProjectExporter {
 	//para escribir a fichero
     public void exportToFile(CrowdSenseProject project, File outputFile) throws Exception {
         // TODO: Implementar
+    	 XMLStreamWriter w = null;
     	try (FileOutputStream fos = new FileOutputStream(outputFile)) {
-    		 XMLStreamWriter w = XMLOutputFactory.newInstance().createXMLStreamWriter(fos, "UTF-8");
+    		 w = XMLOutputFactory.newInstance().createXMLStreamWriter(fos, "UTF-8");
     		 writeDocument(w, project);
     		 w.flush();
     	}  
+	    finally {
+	        if (w != null) {
+	            w.close();
+	        }
+	    }
     }
     
     //metodos auxiliares para los write, privados

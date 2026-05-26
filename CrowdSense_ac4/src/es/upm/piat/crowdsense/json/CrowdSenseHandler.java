@@ -81,7 +81,7 @@ public class CrowdSenseHandler extends DefaultHandler{
 				break;
 			case "probes":
 				if(enSonda) {
-					json.addKey("sondas");
+					json.addKey("probes");
 					json.startArray();
 				}
 				break;
@@ -91,7 +91,7 @@ public class CrowdSenseHandler extends DefaultHandler{
 					json.startObject();	
 					json.addString("id", attrOrEmpty(attrs, "id"));
 					json.addString("sondaRef", attrOrEmpty(attrs, "sondaRef"));
-					json.addNumber("secuncia", attrOrEmpty(attrs, "secuencia"));
+					json.addNumber("secuencia", attrOrEmpty(attrs, "secuencia"));
 				}
 				break;
 			case "location":
@@ -106,7 +106,7 @@ public class CrowdSenseHandler extends DefaultHandler{
 	
 	@Override
 	public void endElement(String uri, String localName, String qName) {
-	 String text = buffer.toString().trim(); // leer el texto acumulado
+	 String text = buffer.toString().trim(); // leer el texto acumulado en el buffer de memoria
 	 
 	 switch (qName) {
 	 // --- Cierre de bloques estructurales ---
@@ -176,19 +176,19 @@ public class CrowdSenseHandler extends DefaultHandler{
              break;
 
          case "fechaInicio":
-             if (enCampana && !enSonda) json.addString("fechaInicio", text); //porque este elemento esta dentro de campana pero no dentro de sonda
+             if (enCampana) json.addString("fechaInicio", text); //porque este elemento esta dentro de campana pero no dentro de sonda
              break;
 
          case "ubicacionRef":
-             if (enSonda && !enProbe) json.addString("ubicacionRef", text);
+             if (enSonda) json.addString("ubicacionRef", text);
              break;
 
          case "macSonda":
-             if (enSonda && !enProbe) json.addString("macSonda", text);
+             if (enSonda) json.addString("macSonda", text);
              break;
 
          case "fechaInstalacion":
-             if (enSonda && !enProbe) json.addString("fechaInstalacion", text);
+             if (enSonda) json.addString("fechaInstalacion", text);
              break;
 
          case "timestamp":
@@ -196,7 +196,7 @@ public class CrowdSenseHandler extends DefaultHandler{
              break;
 
          case "ssid":
-             if (enProbe) json.addNumber("ssid", text);
+             if (enProbe) json.addString("ssid", text);
              break;
 
          case "macAddress":
@@ -246,6 +246,10 @@ public class CrowdSenseHandler extends DefaultHandler{
          case "dispositivosUnicosGlobal":
              if (enEstadisticas) json.addNumber("dispositivosUnicosGlobal", text);
              break;
+         case "estadisticas":
+        	 enEstadisticas = false;
+        	 json.endObject();
+        	 break;
 
 	 }//fin del sw
 
@@ -267,7 +271,7 @@ public class CrowdSenseHandler extends DefaultHandler{
 		}
 
 	public String getJson() {
-		return json.toString(); //convierto el json en un string
+		return json.build(); //llamo a la clase build del jsonbuilder para construir el json
 	}
 	
 	

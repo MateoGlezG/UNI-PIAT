@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<informeXPath generadoEn="2026-05-26T10:06:48.696349900" herramienta="javax.xml.xpath">
+  <fuente>crowdsense-project.xml</fuente>
+  <seccion nivel="1" titulo="Navegación Básica">
+    <consulta>
+      <expresion>/cs:crowdSenseProject/cs:metadata/cs:nombre</expresion>
+      <descripcion>Nombre del proyecto</descripcion>
+      <resultado tipo="escalar">Análisis WiFi Edificio Norte</resultado>
+    </consulta>
+    <consulta>
+      <expresion>/cs:crowdSenseProject/@version</expresion>
+      <descripcion>Versión del documento</descripcion>
+      <resultado tipo="escalar">1.0</resultado>
+    </consulta>
+    <consulta>
+      <expresion>/cs:crowdSenseProject/cs:metadata/cs:responsable</expresion>
+      <descripcion>Responsable del proyecto</descripcion>
+      <resultado tipo="escalar">Estudiante PIAT</resultado>
+    </consulta>
+    <consulta>
+      <expresion>//cs:estadisticas/cs:totalCampanas</expresion>
+      <descripcion>Total campañas según estadísticas</descripcion>
+      <resultado tipo="escalar">2</resultado>
+    </consulta>
+    <consulta>
+      <expresion>/cs:crowdSenseProject/cs:sondas/cs:sonda/cs:nombre</expresion>
+      <descripcion>Nombres de todas las sondas</descripcion>
+      <resultado count="4" tipo="lista">
+        <item>Sonda-L01</item>
+        <item>Sonda-A02</item>
+        <item>Sonda-S03</item>
+        <item>Sonda-E04</item>
+      </resultado>
+    </consulta>
+    <consulta>
+      <expresion>//cs:sonda/cs:ubicacionRef</expresion>
+      <descripcion>Referencias de ubicación de todas las sondas</descripcion>
+      <resultado count="4" tipo="lista">
+        <item>UPM-N-10.B1.P0.L01</item>
+        <item>UPM-N-10.B1.P1.A02</item>
+        <item>UPM-S-05.B1.P0.S03</item>
+        <item>UPM-E-12.B2.P3.E04</item>
+      </resultado>
+    </consulta>
+    <consulta>
+      <expresion>//cs:probe/cs:ssid</expresion>
+      <descripcion>Todos los SSIDs capturados (con repeticiones)</descripcion>
+      <resultado count="10" tipo="lista">
+        <item>eduroam</item>
+        <item>UPM-Guest</item>
+        <item>eduroam</item>
+        <item>UPM-Staff</item>
+        <item>eduroam</item>
+        <item>UPM-Guest</item>
+        <item>eduroam</item>
+        <item>UPM-IoT</item>
+        <item>eduroam</item>
+        <item>UPM-Guest</item>
+      </resultado>
+    </consulta>
+  </seccion>
+  <seccion nivel="2" titulo="Predicados y Filtros">
+    <consulta>
+      <expresion>//cs:sondas/cs:sonda[@status='ACTIVE']/cs:nombre</expresion>
+      <descripcion>Sondas en estado ACTIVE</descripcion>
+      <resultado count="3" tipo="lista">
+        <item>Sonda-L01</item>
+        <item>Sonda-A02</item>
+        <item>Sonda-E04</item>
+      </resultado>
+    </consulta>
+    <consulta>
+      <expresion>//cs:probe[cs:ssid &lt; -70]/cs:macAddress</expresion>
+      <descripcion>MACs de probes con señal débil (RSSI &lt; -70 dBm)</descripcion>
+      <resultado count="0" tipo="lista"/>
+    </consulta>
+    <consulta>
+      <expresion>//cs:probe[cs:ssid &gt;= -65]/cs:macAddress</expresion>
+      <descripcion>MACs de probes con buena señal (RSSI &gt;= -65 dBm)</descripcion>
+      <resultado count="0" tipo="lista"/>
+    </consulta>
+    <consulta>
+      <expresion>//cs:probes/cs:probe[cs:location/cs:edificio='UPM-N-10']/cs:macAddress</expresion>
+      <descripcion>MACs detectadas en el edificio UPM-N-10</descripcion>
+      <resultado count="5" tipo="lista">
+        <item>AA:BB:CC:DD:EE:FF</item>
+        <item>11:22:33:44:55:66</item>
+        <item>DE:AD:BE:EF:00:01</item>
+        <item>CA:FE:BA:BE:00:11</item>
+        <item>F0:F0:F0:F0:F0:F0</item>
+      </resultado>
+    </consulta>
+    <consulta>
+      <expresion>//cs:probes/cs:probe[cs:ssid='eduroam']/cs:macAddress</expresion>
+      <descripcion>MACs de dispositivos buscando la red eduroam</descripcion>
+      <resultado count="5" tipo="lista">
+        <item>AA:BB:CC:DD:EE:FF</item>
+        <item>DE:AD:BE:EF:00:01</item>
+        <item>F0:F0:F0:F0:F0:F0</item>
+        <item>AB:CD:EF:01:23:45</item>
+        <item>77:66:55:44:33:22</item>
+      </resultado>
+    </consulta>
+    <consulta>
+      <expresion>//cs:sondas/cs:sonda[count(//cs:probes/cs:probe) &gt; 1]/cs:nombre</expresion>
+      <descripcion>Sondas que han capturado más de un probe</descripcion>
+      <resultado count="4" tipo="lista">
+        <item>Sonda-L01</item>
+        <item>Sonda-A02</item>
+        <item>Sonda-S03</item>
+        <item>Sonda-E04</item>
+      </resultado>
+    </consulta>
+  </seccion>
+  <seccion nivel="3" titulo="Funciones Agregadas">
+    <consulta>
+      <expresion>count(//cs:sondas/cs:sonda)</expresion>
+      <descripcion>Número de sondas contadas directamente en el XML</descripcion>
+      <resultado tipo="numero">4</resultado>
+    </consulta>
+    <consulta>
+      <expresion>count(//cs:probes/cs:probe)</expresion>
+      <descripcion>Número de probes contados directamente en el XML</descripcion>
+      <resultado tipo="numero">10</resultado>
+    </consulta>
+    <consulta>
+      <expresion>//cs:probe/cs:rssi → Collections.min() en Java</expresion>
+      <descripcion>Valor RSSI más bajo (peor señal) en dBm [min() es XPath 2.0: se obtiene con queryList + Java]</descripcion>
+      <resultado tipo="numero">-80</resultado>
+    </consulta>
+    <consulta>
+      <expresion>//cs:probe/cs:rssi → Collections.max() en Java</expresion>
+      <descripcion>Valor RSSI más alto (mejor señal) en dBm [max() es XPath 2.0: se obtiene con queryList + Java]</descripcion>
+      <resultado tipo="numero">-55</resultado>
+    </consulta>
+    <consulta>
+      <expresion>sum(//cs:probe/cs:rssi) div count(//cs:probe/cs:rssi)</expresion>
+      <descripcion>RSSI promedio: sum() y count() son XPath 1.0 nativos</descripcion>
+      <resultado tipo="numero">-67,50</resultado>
+    </consulta>
+    <consulta>
+      <expresion>count(//cs:probes/cs:probe[cs:rssi &lt; -70])</expresion>
+      <descripcion>Número de probes con RSSI &lt; -70 dBm</descripcion>
+      <resultado tipo="numero">4</resultado>
+    </consulta>
+    <consulta>
+      <expresion>string-length(//cs:metadata/cs:nombre)</expresion>
+      <descripcion>Número de caracteres del nombre del proyecto</descripcion>
+      <resultado tipo="numero">28</resultado>
+    </consulta>
+    <consulta>
+      <expresion>//cs:probe/cs:ssid → stream().distinct().count() en Java</expresion>
+      <descripcion>Número de SSIDs únicos [distinct-values() es XPath 2.0: se calcula en Java]</descripcion>
+      <resultado tipo="numero">4</resultado>
+    </consulta>
+  </seccion>
+</informeXPath>

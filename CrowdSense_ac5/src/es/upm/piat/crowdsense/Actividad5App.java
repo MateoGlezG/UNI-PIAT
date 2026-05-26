@@ -44,7 +44,7 @@ public class Actividad5App {
             // NIVEL 1: NAVEGACIÓN BÁSICA
             // =================================================================
             System.out.println("╔══════════════════════════════════════════════╗");
-            System.out.println("║  NIVEL 1 — Navegación Básica                ║");
+            System.out.println("║  NIVEL 1 — Navegación Básica                 ║");
             System.out.println("╚══════════════════════════════════════════════╝");
 
             Element sec1 = report.addSeccion("1", "Navegación Básica");
@@ -97,7 +97,7 @@ public class Actividad5App {
             // NIVEL 2: PREDICADOS Y FILTROS
             // =================================================================
             System.out.println("╔══════════════════════════════════════════════╗");
-            System.out.println("║  NIVEL 2 — Predicados y Filtros             ║");
+            System.out.println("║  NIVEL 2 — Predicados y Filtros              ║");
             System.out.println("╚══════════════════════════════════════════════╝");
 
             Element sec2 = report.addSeccion("2", "Predicados y Filtros");
